@@ -15,13 +15,14 @@ const prefersReducedMotion = () =>
 export function Curtain({ onOpen, onDone }: { onOpen: () => void; onDone: () => void }) {
   const { t } = useLang()
   const [phase, setPhase] = useState<Phase>(() => (prefersReducedMotion() ? 'done' : 'closed'))
-  const [target, setTarget] = useState(0.1)
+  // final width of each curtain half, % of the screen (matches the permanent side drapes)
+  const [target, setTarget] = useState(4)
 
   const open = useCallback(() => {
     setPhase((p) => {
       if (p !== 'closed') return p
       const w = window.innerWidth
-      setTarget(drapeWidth(w) / (w / 2))
+      setTarget((drapeWidth(w) / w) * 100)
       return 'opening'
     })
   }, [])
@@ -77,25 +78,26 @@ export function Curtain({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
       className="fixed inset-0 z-[100] cursor-pointer select-none overflow-hidden"
       onClick={open}
     >
+      {/* real width (not scaleX), so pleats gather without smearing and end exactly as the side drapes */}
       <motion.div
-        className="velvet absolute inset-y-0 left-0 w-[50.3%] origin-left"
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: opening ? target : 1 }}
+        className="velvet absolute inset-y-0 left-0"
+        initial={false}
+        animate={{ width: opening ? `${target}%` : '50.3%' }}
         transition={panel}
+        style={{ boxShadow: '10px 0 26px rgb(0 0 0 / 0.65)' }}
+      />
+      <motion.div
+        className="velvet absolute inset-y-0 right-0"
+        initial={false}
+        animate={{ width: opening ? `${target}%` : '50.3%' }}
+        transition={{ ...panel, delay: 0.07 }}
         onAnimationComplete={() => {
           if (opening) {
             setPhase('done')
             onDone()
           }
         }}
-        style={{ boxShadow: '14px 0 40px rgb(0 0 0 / 0.6)' }}
-      />
-      <motion.div
-        className="velvet absolute inset-y-0 right-0 w-[50.3%] origin-right"
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: opening ? target : 1 }}
-        transition={{ ...panel, delay: 0.07 }}
-        style={{ boxShadow: '-14px 0 40px rgb(0 0 0 / 0.6)' }}
+        style={{ boxShadow: '-10px 0 26px rgb(0 0 0 / 0.65)' }}
       />
 
       {/* swagged valance: lifts away together with the curtains, same pace */}

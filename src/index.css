@@ -34,6 +34,9 @@
     scroll-behavior: smooth;
     background: var(--color-stage);
     color-scheme: dark;
+    /* keep the layout width the same whether or not the page can scroll, so nothing shifts when the curtain unlocks it */
+    scrollbar-gutter: stable;
+    scrollbar-color: #5a4424 #0b0708;
   }
   body {
     margin: 0;
@@ -67,26 +70,47 @@
 
 /* ───────── Velvet ───────── */
 
-/* Vertical folds: alternating light/dark bands with a soft highlight, like a gathered curtain. */
+/*
+ * Velvet with a fixed number of pleats (percentages, not pixels), so the same
+ * element looks right at any width: the curtain half while it gathers and the
+ * permanent side drape it ends up as are literally the same pattern.
+ */
 .velvet {
   background:
     linear-gradient(
       90deg,
-      rgb(0 0 0 / 0.55) 0%,
-      rgb(0 0 0 / 0) 12%,
-      rgb(255 255 255 / 0.05) 50%,
-      rgb(0 0 0 / 0) 88%,
-      rgb(0 0 0 / 0.55) 100%
+      rgb(0 0 0 / 0.5) 0%,
+      rgb(0 0 0 / 0) 18%,
+      rgb(0 0 0 / 0) 82%,
+      rgb(0 0 0 / 0.42) 100%
     ),
-    repeating-linear-gradient(
+    linear-gradient(
       90deg,
-      #4d0b18 0,
-      #7a1226 26px,
-      #a1213a 40px,
-      #7a1226 54px,
-      #4d0b18 80px,
-      #340610 92px,
-      #4d0b18 106px
+      #2a050c 0.000%,
+      #6a0f22 5.000%,
+      #a1213a 8.333%,
+      #6a0f22 12.000%,
+      #2a050c 16.667%,
+      #6a0f22 21.667%,
+      #952038 25.000%,
+      #6a0f22 28.667%,
+      #2a050c 33.333%,
+      #6a0f22 38.333%,
+      #a1213a 41.667%,
+      #6a0f22 45.333%,
+      #2a050c 50.000%,
+      #6a0f22 55.000%,
+      #952038 58.333%,
+      #6a0f22 62.000%,
+      #2a050c 66.667%,
+      #6a0f22 71.667%,
+      #a1213a 75.000%,
+      #6a0f22 78.667%,
+      #2a050c 83.333%,
+      #6a0f22 88.333%,
+      #952038 91.667%,
+      #6a0f22 95.333%,
+      #2a050c 100%
     );
 }
 .velvet::after {
@@ -95,11 +119,6 @@
   inset: 0;
   background: linear-gradient(180deg, rgb(0 0 0 / 0.45), transparent 22%, transparent 70%, rgb(0 0 0 / 0.55));
   pointer-events: none;
-}
-.drape-edge {
-  background:
-    linear-gradient(90deg, rgb(0 0 0 / 0.5), transparent 40%, rgb(0 0 0 / 0.35)),
-    repeating-linear-gradient(90deg, #4d0b18 0, #7a1226 10px, #a1213a 16px, #7a1226 22px, #340610 34px);
 }
 
 /* ───────── Film grain ───────── */
