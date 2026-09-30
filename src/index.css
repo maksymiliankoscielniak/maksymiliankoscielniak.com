@@ -8,6 +8,7 @@
 @import '@fontsource/courier-prime/400.css';
 @import '@fontsource/courier-prime/400-italic.css';
 @import '@fontsource/courier-prime/700.css';
+@import '@fontsource/allura/400.css';
 @import 'tailwindcss';
 
 @theme {
@@ -25,6 +26,7 @@
   --font-display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
   --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-script: 'Courier Prime', 'Courier New', monospace;
+  --font-signature: 'Allura', 'Segoe Script', 'Brush Script MT', cursive;
 }
 
 @layer base {

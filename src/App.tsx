@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AiDoor } from './components/AiDoor'
 import { AiPanel } from './components/AiPanel'
+import { Bouquet } from './components/Bouquet'
 import { About } from './components/About'
 import { Credits } from './components/Credits'
 import { Curtain } from './components/Curtain'
@@ -60,6 +61,7 @@ function Shell() {
       </a>
       <Curtain onOpen={() => setOpened(true)} onDone={() => setDone(true)} />
       <SideDrapes />
+      <Bouquet />
       <Header visible={opened} />
       <AiDoor visible={done && !aiOpen} onOpen={openAi} />
       <AiPanel open={aiOpen} onClose={closeAi} />

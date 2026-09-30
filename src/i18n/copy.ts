@@ -24,7 +24,7 @@ export const en = {
     switchTo: 'Switch language to',
   },
   curtain: {
-    hint: 'Tap anywhere to begin',
+    hint: 'Click or tap to open the curtain',
     opening: 'Opening curtain',
   },
   hero: {
@@ -134,7 +134,7 @@ export const pl: Dict = {
     switchTo: 'Zmień język na',
   },
   curtain: {
-    hint: 'Dotknij, aby zacząć',
+    hint: 'Kliknij lub dotknij, aby rozsunąć kurtynę',
     opening: 'Kurtyna idzie w górę',
   },
   hero: {

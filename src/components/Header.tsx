@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useLang } from '../i18n/LanguageContext'
 import { FilmSwitch } from './FilmSwitch'
@@ -9,6 +9,7 @@ type SectionId = (typeof SECTIONS)[number]
 
 export function Header({ visible }: { visible: boolean }) {
   const { t } = useLang()
+  const reduce = useReducedMotion()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState<SectionId | null>(null)
@@ -60,27 +61,44 @@ export function Header({ visible }: { visible: boolean }) {
         className="absolute inset-0 -z-10 transition-opacity duration-500"
         style={{
           opacity: scrolled || open ? 1 : 0,
-          background: 'linear-gradient(180deg, rgb(11 7 8 / 0.94), rgb(11 7 8 / 0.78))',
+          background: 'linear-gradient(180deg, rgb(11 7 8 / 0.98), rgb(11 7 8 / 0.94))',
           backdropFilter: 'blur(10px)',
           borderBottom: '1px solid rgb(209 173 102 / 0.18)',
         }}
       />
       <div
-        className="mx-auto flex h-[68px] max-w-6xl items-center justify-between gap-4"
+        className="mx-auto grid h-[68px] max-w-6xl grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[1fr_auto_1fr]"
         style={{ paddingInline: 'calc(var(--drape-w) + 1rem)' }}
       >
         <a
           href="#top"
           aria-label={t.nav.home}
-          className="flex items-center gap-3 rounded-md font-display text-lg font-semibold italic text-brass"
+          className="group relative justify-self-start rounded-md py-1 text-brass"
         >
-          <span className="grid h-9 w-9 place-items-center rounded-full border border-brass/70 text-[0.95rem] not-italic tracking-wide">
-            MK
-          </span>
-          <span className="hidden lg:inline">Maksymilian Kościelniak</span>
+          <motion.span
+            className="relative inline-block -rotate-2 whitespace-nowrap px-1 font-signature text-[1.9rem] leading-none sm:text-[2.3rem]"
+            initial={false}
+            animate={{
+              clipPath: reduce || visible ? 'inset(-40% -15% -60% -10%)' : 'inset(-40% 100% -60% -10%)',
+            }}
+            transition={{ duration: reduce ? 0 : 1.7, delay: visible ? 1.0 : 0, ease: [0.45, 0, 0.25, 1] }}
+            style={{ textShadow: '0 0 18px rgb(209 173 102 / 0.28)' }}
+          >
+            <span className="hidden sm:inline">Maksymilian </span>
+            <span className="sm:hidden">M. </span>
+            Kościelniak
+          </motion.span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 10"
+            preserveAspectRatio="none"
+            className="absolute inset-x-1 -bottom-0.5 h-[7px] w-[calc(100%-0.5rem)] opacity-70 transition-opacity group-hover:opacity-100"
+          >
+            <path d="M1 7 C40 1 110 9 199 2" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          </svg>
         </a>
 
-        <nav aria-label={t.nav.label} className="hidden md:block">
+        <nav aria-label={t.nav.label} className="hidden justify-self-center md:block">
           <ul className="flex items-center gap-8">
             {links.map((l) => (
               <li key={l.id}>
@@ -103,7 +121,7 @@ export function Header({ visible }: { visible: boolean }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 justify-self-end">
           <FilmSwitch />
           <button
             type="button"
