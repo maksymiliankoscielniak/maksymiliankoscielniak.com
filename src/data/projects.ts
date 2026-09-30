@@ -1,7 +1,7 @@
 import type { Lang } from '../i18n/copy'
 
 export type L = Record<Lang, string>
-export type ProjectId = 'nexusrisk' | 'countit' | 'gymgallery' | 'peppin' | 'weather'
+export type ProjectId = 'nexusrisk' | 'countit' | 'gymgallery' | 'peppin'
 
 export type Project = {
   id: ProjectId
@@ -12,7 +12,7 @@ export type Project = {
   tagline: L
   description: L
   stack: string[]
-  /** TODO(Maksymilian): fill in `href` for each link. Links with an empty href are hidden. */
+  /** Links with an empty href are hidden. */
   links: { label: L; href: string }[]
 }
 
@@ -35,8 +35,8 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript', 'Vite'],
     links: [
-      { label: live, href: '' },
-      { label: code, href: '' },
+      { label: live, href: 'https://maksymiliankoscielniak.github.io/NexusRisk/' },
+      { label: code, href: 'https://github.com/maksymiliankoscielniak/NexusRisk' },
     ],
   },
   {
@@ -51,8 +51,8 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript', 'FastAPI', 'USDA FoodData Central'],
     links: [
-      { label: live, href: '' },
-      { label: code, href: '' },
+      { label: live, href: 'https://maksymiliankoscielniak.github.io/countIT/' },
+      { label: code, href: 'https://github.com/maksymiliankoscielniak/countIT' },
     ],
   },
   {
@@ -67,8 +67,8 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript'],
     links: [
-      { label: live, href: '' },
-      { label: code, href: '' },
+      { label: live, href: 'https://maksymiliankoscielniak.github.io/GymGallery/' },
+      { label: code, href: 'https://github.com/maksymiliankoscielniak/GymGallery' },
     ],
   },
   {
@@ -83,24 +83,8 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript', 'Vite', 'GitHub Pages'],
     links: [
-      { label: live, href: '' },
-      { label: code, href: '' },
-    ],
-  },
-  {
-    id: 'weather',
-    title: 'Full-Stack Weather App',
-    posterTitle: ['Full-Stack', 'Weather App'],
-    genre: { en: 'Nature documentary', pl: 'Film przyrodniczy' },
-    tagline: { en: 'Forecast, front to back.', pl: 'Prognoza od frontu po backend.' },
-    description: {
-      en: 'A responsive weather app with a custom API, real-time city search, and a custom-designed UI.',
-      pl: 'Responsywna aplikacja pogodowa z własnym API, wyszukiwaniem miast w czasie rzeczywistym i autorskim interfejsem.',
-    },
-    stack: ['Angular', 'Python'],
-    links: [
-      { label: { en: 'Angular frontend', pl: 'Frontend (Angular)' }, href: '' },
-      { label: { en: 'Python backend', pl: 'Backend (Python)' }, href: '' },
+      { label: live, href: 'https://maksymiliankoscielniak.github.io/Peppin/' },
+      { label: code, href: 'https://github.com/maksymiliankoscielniak/Peppin' },
     ],
   },
 ]

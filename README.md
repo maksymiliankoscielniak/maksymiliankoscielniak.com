@@ -39,15 +39,9 @@ npm run preview    # serve dist/ locally
 
 ## Deploy to GitHub Pages
 
-The workflow builds and publishes on every push to `main`. It ships as `deploy-workflow.yml` in the project root;
-GitHub only reads workflows from `.github/workflows/`, so move it there before the first push:
+The workflow in `.github/workflows/deploy.yml` builds and publishes on every push to `main`.
 
-```bash
-mkdir -p .github/workflows
-mv deploy-workflow.yml .github/workflows/deploy.yml
-```
-
-1. Create an empty repository on GitHub (any name), then from this folder:
+1. Publish the repository from GitHub Desktop (keep it **public**: free accounts only serve Pages from public repos), or from the command line:
 
    ```bash
    git init -b main

@@ -45,7 +45,7 @@ export const en = {
     scroll: 'Scroll to roll the trailer',
     bodyTitle: 'Maksymilian Kościelniak',
     body: [
-      'I’m a full-stack developer and web designer who likes turning complicated things into interfaces people can use without a manual: risk models, nutrition maths and pharmacokinetics.',
+      'I design websites the way a good film is made: every frame has a purpose and nothing is there just for show. I care about clear hierarchy, readable type, calm colour, and motion that helps people understand what just happened.',
       'I start with the problem, pick the simplest stack that solves it, and keep the details tidy: considered design, typed code, honest empty states, pages that load fast.',
     ],
     stack: [
@@ -155,7 +155,7 @@ export const pl: Dict = {
     scroll: 'Przewijaj, by odtworzyć zwiastun',
     bodyTitle: 'Maksymilian Kościelniak',
     body: [
-      'Jestem full-stack developerem i projektantem stron internetowych, który lubi zamieniać skomplikowane rzeczy w interfejsy obsługiwane bez instrukcji: modele ryzyka, rachunek żywieniowy, farmakokinetykę.',
+      'Projektuję strony jak dobry film: każdy kadr ma swój cel i nic nie jest tu tylko na pokaz. Dbam o czytelną hierarchię, wygodną typografię, stonowane kolory i animacje, które pomagają zrozumieć, co się właśnie stało.',
       'Zaczynam od problemu, wybieram najprostszy stack, który go rozwiązuje, i dbam o szczegóły: przemyślany projekt, otypowany kod, sensowne puste stany, strony, które szybko się ładują.',
     ],
     stack: [

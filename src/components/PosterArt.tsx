@@ -243,71 +243,7 @@ function peppin(): Theme {
   }
 }
 
-function weather(): Theme {
-  return {
-    ink: '#fff0de',
-    accent: '#ffb469',
-    bg: (
-      <>
-        <defs>
-          <linearGradient id="wx-sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#0d2650" />
-            <stop offset="0.4" stopColor="#5d5a9c" />
-            <stop offset="0.515" stopColor="#f3a75c" />
-            <stop offset="1" stopColor="#f3a75c" />
-          </linearGradient>
-          <linearGradient id="wx-ground" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#2b1a30" />
-            <stop offset="0.2" stopColor="#0d1120" />
-            <stop offset="1" stopColor="#070911" />
-          </linearGradient>
-        </defs>
-        <rect width={W} height={H} fill="url(#wx-sky)" />
-      </>
-    ),
-    motif: (
-      <g>
-        {/* sun rays */}
-        {Array.from({ length: 9 }).map((_, i) => {
-          const a = Math.PI + (Math.PI / 8) * i
-          return (
-            <line
-              key={i}
-              x1={150 + Math.cos(a) * 40}
-              y1={206 + Math.sin(a) * 40}
-              x2={150 + Math.cos(a) * 58}
-              y2={206 + Math.sin(a) * 58}
-              stroke="#fff0de"
-              strokeOpacity="0.7"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          )
-        })}
-        <circle cx="150" cy="206" r="32" fill="#ffd894" />
-        {/* clouds */}
-        <g fill="#f3ecff" fillOpacity="0.92" transform="translate(0 -16)">
-          <circle cx="86" cy="128" r="14" />
-          <circle cx="104" cy="120" r="18" />
-          <circle cx="126" cy="128" r="14" />
-          <rect x="72" y="128" width="68" height="14" rx="7" />
-        </g>
-        <g fill="#dcd1f5" fillOpacity="0.85" transform="translate(0 -14)">
-          <circle cx="188" cy="104" r="11" />
-          <circle cx="204" cy="97" r="15" />
-          <circle cx="223" cy="104" r="11" />
-          <rect x="177" y="104" width="57" height="12" rx="6" />
-        </g>
-        {[96, 108, 120].map((x) => (
-          <line key={x} x1={x} y1="134" x2={x - 5} y2="148" stroke="#cfe1ff" strokeOpacity="0.7" strokeWidth="1.3" strokeLinecap="round" />
-        ))}
-        <rect x="0" y="206" width={W} height={H - 206} fill="url(#wx-ground)" />
-      </g>
-    ),
-  }
-}
-
-const builders: Record<ProjectId, () => Theme> = { nexusrisk, countit, gymgallery, peppin, weather }
+const builders: Record<ProjectId, () => Theme> = { nexusrisk, countit, gymgallery, peppin }
 
 export function PosterArt({
   project,

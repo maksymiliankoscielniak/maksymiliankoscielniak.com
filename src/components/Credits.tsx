@@ -22,7 +22,7 @@ function LinkedinIcon({ size = 26 }: { size?: number }) {
 function displayUrl(href: string) {
   try {
     const u = new URL(href)
-    return (u.host + u.pathname).replace(/\/$/, '')
+    return (u.host.replace(/^www\./, '') + decodeURIComponent(u.pathname)).replace(/\/$/, '')
   } catch {
     return href
   }
