@@ -1,4 +1,8 @@
 import type { Lang } from '../i18n/copy'
+import nexusriskScreen from '../assets/screens/nexusrisk.webp'
+import countitScreen from '../assets/screens/countit.webp'
+import gymgalleryScreen from '../assets/screens/gymgallery.webp'
+import peppinScreen from '../assets/screens/peppin.webp'
 
 export type L = Record<Lang, string>
 export type ProjectId = 'nexusrisk' | 'countit' | 'gymgallery' | 'peppin'
@@ -12,6 +16,8 @@ export type Project = {
   tagline: L
   description: L
   stack: string[]
+  /** Screenshot shown on the TV, and which part of it stays in frame */
+  screen: { src: string; position: string }
   /** Links with an empty href are hidden. */
   links: { label: L; href: string }[]
 }
@@ -34,6 +40,7 @@ export const projects: Project[] = [
       pl: 'Samodzielny, interaktywny dashboard do stress-testów makro i ryzyka portfela. Dynamiczne przebalansowanie alokacji aktywów, symulacje historycznych kryzysów (krach 2008, szoki stagflacyjne), modelowanie Monte Carlo i metryki ryzyka w czasie rzeczywistym (wskaźnik Sharpe’a, VaR 95%).',
     },
     stack: ['React', 'TypeScript', 'Vite'],
+    screen: { src: nexusriskScreen, position: 'left top' },
     links: [
       { label: live, href: 'https://maksymiliankoscielniak.github.io/NexusRisk/' },
       { label: code, href: 'https://github.com/maksymiliankoscielniak/NexusRisk' },
@@ -50,6 +57,7 @@ export const projects: Project[] = [
       pl: 'Nowoczesna aplikacja full-stack do śledzenia kalorii i makroskładników: bezpieczne logowanie, zarządzanie posiłkami metodą przeciągnij i upuść oraz dynamiczne obliczanie makr wzorem Mifflina-St Jeora. Zintegrowana z rządowym API USDA FoodData Central.',
     },
     stack: ['React', 'TypeScript', 'FastAPI', 'USDA FoodData Central'],
+    screen: { src: countitScreen, position: 'center top' },
     links: [
       { label: live, href: 'https://maksymiliankoscielniak.github.io/countIT/' },
       { label: code, href: 'https://github.com/maksymiliankoscielniak/countIT' },
@@ -66,6 +74,7 @@ export const projects: Project[] = [
       pl: 'Planer hipertrofii inspirowany sztuką: naszkicuj split na pergaminie, namaluj wybór ćwiczeń olejem, a na końcu wyrzeźb sylwetkę w marmurze. Zbudowany w React i TypeScript, bez backendu – wszystkie dane zostają w przeglądarce.',
     },
     stack: ['React', 'TypeScript'],
+    screen: { src: gymgalleryScreen, position: 'center' },
     links: [
       { label: live, href: 'https://maksymiliankoscielniak.github.io/GymGallery/' },
       { label: code, href: 'https://github.com/maksymiliankoscielniak/GymGallery' },
@@ -82,6 +91,7 @@ export const projects: Project[] = [
       pl: 'Czysty, działający po stronie klienta kalkulator rekonstytucji oraz edukacyjna biblioteka związków z wyszukiwarką celów i symulatorem okresu półtrwania. Wdrożony na GitHub Pages. Wyłącznie w celach edukacyjnych – to nie porada medyczna.',
     },
     stack: ['React', 'TypeScript', 'Vite', 'GitHub Pages'],
+    screen: { src: peppinScreen, position: 'left center' },
     links: [
       { label: live, href: 'https://maksymiliankoscielniak.github.io/Peppin/' },
       { label: code, href: 'https://github.com/maksymiliankoscielniak/Peppin' },

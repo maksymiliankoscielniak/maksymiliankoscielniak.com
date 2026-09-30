@@ -19,22 +19,13 @@ function LinkedinIcon({ size = 26 }: { size?: number }) {
   )
 }
 
-function displayUrl(href: string) {
-  try {
-    const u = new URL(href)
-    return (u.host.replace(/^www\./, '') + decodeURIComponent(u.pathname)).replace(/\/$/, '')
-  } catch {
-    return href
-  }
-}
-
 export function Credits() {
   const { t } = useLang()
 
-  const items: { key: string; label: string; href: string; detail: string; icon: ReactNode; external: boolean }[] = [
-    { key: 'github', label: t.contact.github, href: site.links.github, detail: displayUrl(site.links.github), icon: <GithubIcon />, external: true },
-    { key: 'linkedin', label: t.contact.linkedin, href: site.links.linkedin, detail: displayUrl(site.links.linkedin), icon: <LinkedinIcon />, external: true },
-    { key: 'email', label: t.contact.email, href: `mailto:${site.links.email}`, detail: site.links.email, icon: <Mail size={26} aria-hidden="true" />, external: false },
+  const items: { key: string; label: string; href: string; icon: ReactNode; external: boolean }[] = [
+    { key: 'github', label: t.contact.github, href: site.links.github, icon: <GithubIcon size={22} />, external: true },
+    { key: 'linkedin', label: t.contact.linkedin, href: site.links.linkedin, icon: <LinkedinIcon size={22} />, external: true },
+    { key: 'email', label: t.contact.email, href: `mailto:${site.links.email}`, icon: <Mail size={22} aria-hidden="true" />, external: false },
   ]
 
   return (
@@ -62,23 +53,21 @@ export function Credits() {
         </p>
         <p className="mx-auto mt-8 max-w-[44ch] text-bone-dim">{t.contact.intro}</p>
 
-        <ul className="mx-auto mt-14 flex max-w-md flex-col">
+        <ul className="mt-12 flex flex-wrap items-center justify-center gap-3">
           {items.map((it) => (
-            <li key={it.key} className="border-t border-brass/20 last:border-b">
+            <li key={it.key}>
               <a
                 href={it.href}
                 {...(it.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                className="group flex items-center gap-5 px-2 py-5 text-left transition-colors hover:text-brass"
+                className="inline-flex items-center gap-3 rounded-full border border-brass/60 px-6 py-3 text-lg text-bone transition-colors hover:bg-brass hover:text-stage"
               >
-                <span className="text-brass">{it.icon}</span>
-                <span className="flex-1">
-                  <span className="block font-display text-2xl font-semibold">{it.label}</span>
-                  <span className="block break-all font-script text-sm text-bone-dim group-hover:text-brass/80">{it.detail}</span>
-                </span>
+                <span aria-hidden="true">{it.icon}</span>
+                {it.label}
               </a>
             </li>
           ))}
         </ul>
+        <p className="mt-6 select-all font-script text-sm text-bone-dim">{site.links.email}</p>
       </div>
     </section>
   )

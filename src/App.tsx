@@ -11,6 +11,7 @@ import { Hero } from './components/Hero'
 import { Projects } from './components/Projects'
 import { SideDrapes } from './components/SideDrapes'
 import { LanguageProvider, useLang } from './i18n/LanguageContext'
+import { goToSection } from './lib/goToSection'
 
 function Shell() {
   const { t } = useLang()
@@ -31,6 +32,18 @@ function Shell() {
   useEffect(() => {
     if (done && window.location.hash === '#ai') setAiOpen(true)
   }, [done])
+  // in-page anchors: short hops glide, long jumps (past the trailer) cut
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+      const a = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]')
+      const id = a?.getAttribute('href')?.slice(1)
+      if (id && id !== 'ai' && goToSection(id)) e.preventDefault()
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
+  }, [])
+
   useEffect(() => {
     const onHash = () => window.location.hash === '#ai' && setAiOpen(true)
     window.addEventListener('hashchange', onHash)

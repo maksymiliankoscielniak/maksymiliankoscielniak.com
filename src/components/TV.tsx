@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import type { Project } from '../data/projects'
 import { useLang } from '../i18n/LanguageContext'
-import { PosterArt } from './PosterArt'
 
 /** A CRT set "broadcasting" one project's poster. Hover or focus changes the channel. */
 export function TV({
@@ -50,7 +49,16 @@ export function TV({
               transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1], delay: 0.1 }}
             >
               <span className="tv-flicker absolute inset-0 block">
-                <PosterArt project={project} lang={lang} credits={false} className="absolute inset-0 h-full w-full" />
+                <img
+                  src={project.screen.src}
+                  alt=""
+                  width={1100}
+                  height={560}
+                  loading="lazy"
+                  draggable={false}
+                  className="absolute inset-0 h-full w-full select-none object-cover"
+                  style={{ objectPosition: project.screen.position }}
+                />
               </span>
               <span className="tv-roll pointer-events-none absolute inset-x-0 top-0 block" />
               <span className="tv-scanlines pointer-events-none absolute inset-0 block" />
