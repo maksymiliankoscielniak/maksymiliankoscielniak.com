@@ -36,17 +36,17 @@ export const en = {
   about: {
     heading: 'About',
     cards: [
-      'He designs it.',
-      'He builds it.',
-      'From stress-testing portfolios to counting macros.',
-      'React and TypeScript up front. FastAPI and Python behind the scenes.',
+      'Design with intent.',
+      'Engineering with care.',
+      'Interfaces that make complex data easy to read.',
+      'React and TypeScript in the browser. FastAPI and Python behind it.',
     ],
-    finale: 'Coming soon to your team.',
-    scroll: 'Scroll to roll the trailer',
+    finale: 'Open to new projects.',
+    scroll: 'Scroll to continue',
     bodyTitle: 'Maksymilian Kościelniak',
     body: [
-      'I design websites the way a good film is made: every frame has a purpose and nothing is there just for show. I care about clear hierarchy, readable type, calm colour, and motion that helps people understand what just happened.',
-      'I start with the problem, pick the simplest stack that solves it, and keep the details tidy: considered design, typed code, honest empty states, pages that load fast.',
+      'I’m a full-stack developer and web designer. What interests me most is the point where a design meets the person using it: clear hierarchy, readable typography, restrained colour, and motion that explains rather than decorates.',
+      'I begin with the problem, choose the simplest stack that solves it, and keep the details in order: considered interfaces, typed code, honest empty states and pages that load quickly. Because I work across the whole stack, a design decision never gets lost between mockup and production.',
     ],
     stack: [
       { label: 'Front of house', items: 'React, TypeScript, Vite, Tailwind CSS' },
@@ -146,17 +146,17 @@ export const pl: Dict = {
   about: {
     heading: 'O mnie',
     cards: [
-      'Zaprojektuje to.',
-      'Zbuduje to.',
-      'Od stress-testów portfela po liczenie makroskładników.',
-      'React i TypeScript na froncie. FastAPI i Python za kulisami.',
+      'Projekt z intencją.',
+      'Wykonanie z dbałością.',
+      'Interfejsy, w których złożone dane są czytelne.',
+      'React i TypeScript w przeglądarce. FastAPI i Python za nimi.',
     ],
-    finale: 'Wkrótce w Twoim zespole.',
-    scroll: 'Przewijaj, by odtworzyć zwiastun',
+    finale: 'Otwarty na nowe projekty.',
+    scroll: 'Przewijaj, aby kontynuować',
     bodyTitle: 'Maksymilian Kościelniak',
     body: [
-      'Projektuję strony jak dobry film: każdy kadr ma swój cel i nic nie jest tu tylko na pokaz. Dbam o czytelną hierarchię, wygodną typografię, stonowane kolory i animacje, które pomagają zrozumieć, co się właśnie stało.',
-      'Zaczynam od problemu, wybieram najprostszy stack, który go rozwiązuje, i dbam o szczegóły: przemyślany projekt, otypowany kod, sensowne puste stany, strony, które szybko się ładują.',
+      'Jestem full-stack developerem i projektantem stron. Najbardziej interesuje mnie moment, w którym projekt spotyka się z osobą, która z niego korzysta: czytelna hierarchia, dobra typografia, stonowane kolory i animacja, która wyjaśnia, a nie tylko ozdabia.',
+      'Zaczynam od problemu, wybieram najprostszy stack, który go rozwiązuje, i dbam o szczegóły: przemyślane interfejsy, otypowany kod, sensowne puste stany i szybko ładujące się strony. Pracuję na całym stosie, więc decyzje projektowe nie giną między makietą a produkcją.',
     ],
     stack: [
       { label: 'Przed kurtyną', items: 'React, TypeScript, Vite, Tailwind CSS' },

@@ -7,7 +7,7 @@ import { FilmSwitch } from './FilmSwitch'
 const SECTIONS = ['about', 'projects', 'contact'] as const
 type SectionId = (typeof SECTIONS)[number]
 
-export function Header({ visible, onOpenAi }: { visible: boolean; onOpenAi: () => void }) {
+export function Header({ visible }: { visible: boolean }) {
   const { t } = useLang()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -42,17 +42,11 @@ export function Header({ visible, onOpenAi }: { visible: boolean; onOpenAi: () =
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
-  const links: { id: SectionId | 'ai'; label: string }[] = [
+  const links: { id: SectionId; label: string }[] = [
     { id: 'about', label: t.nav.about },
     { id: 'projects', label: t.nav.projects },
-    { id: 'ai', label: t.nav.ai },
     { id: 'contact', label: t.nav.contact },
   ]
-  const openAi = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setOpen(false)
-    onOpenAi()
-  }
 
   return (
     <motion.header
@@ -92,8 +86,6 @@ export function Header({ visible, onOpenAi }: { visible: boolean; onOpenAi: () =
               <li key={l.id}>
                 <a
                   href={`#${l.id}`}
-                  onClick={l.id === 'ai' ? openAi : undefined}
-                  aria-haspopup={l.id === 'ai' ? 'dialog' : undefined}
                   aria-current={active === l.id ? 'true' : undefined}
                   className={`relative py-2 text-[1.05rem] transition-colors hover:text-brass ${
                     active === l.id ? 'text-brass' : 'text-bone-dim'
@@ -142,7 +134,7 @@ export function Header({ visible, onOpenAi }: { visible: boolean; onOpenAi: () =
                 <li key={l.id} className="border-t border-brass/15">
                   <a
                     href={`#${l.id}`}
-                    onClick={l.id === 'ai' ? openAi : () => setOpen(false)}
+                    onClick={() => setOpen(false)}
                     className={`block py-3.5 font-display text-2xl italic ${
                       active === l.id ? 'text-brass' : 'text-bone'
                     }`}

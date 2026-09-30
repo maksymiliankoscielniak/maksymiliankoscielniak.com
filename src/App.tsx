@@ -60,7 +60,7 @@ function Shell() {
       </a>
       <Curtain onOpen={() => setOpened(true)} onDone={() => setDone(true)} />
       <SideDrapes />
-      <Header visible={opened} onOpenAi={openAi} />
+      <Header visible={opened} />
       <AiDoor visible={done && !aiOpen} onOpen={openAi} />
       <AiPanel open={aiOpen} onClose={closeAi} />
       <FrameFlash />
