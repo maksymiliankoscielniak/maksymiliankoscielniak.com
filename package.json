@@ -10,9 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource/allura": "^5.3.0",
-    "@fontsource/bodoni-moda": "^5.3.0",
-    "@fontsource/courier-prime": "^5.3.0",
     "@fontsource/newsreader": "^5.3.0",
     "framer-motion": "^13.4.6",
     "lucide-react": "^1.49.0",
@@ -32,6 +31,6 @@
   "engines": {
     "node": ">=20"
   },
-  "description": "Portfolio of Maksymilian Kościelniak: a cinema-and-theatre themed site built with Vite, React and TypeScript.",
+  "description": "Portfolio of Maksymilian Kościelniak: a design-led portfolio site built with Vite, React and TypeScript.",
   "license": "UNLICENSED"
 }

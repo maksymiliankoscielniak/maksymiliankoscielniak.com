@@ -3,15 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useLang } from '../i18n/LanguageContext'
 
-/**
- * AI policy as a prompter's box that rolls in from the side of the stage.
- * The script lists what the prompter (AI) does and what stays with me.
- */
+/** The AI policy as a drawer that slides in from the right edge. */
 export function AiPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
-  return <AnimatePresence>{open && <Booth onClose={onClose} />}</AnimatePresence>
+  return <AnimatePresence>{open && <Drawer onClose={onClose} />}</AnimatePresence>
 }
 
-function Booth({ onClose }: { onClose: () => void }) {
+function Drawer({ onClose }: { onClose: () => void }) {
   const { t } = useLang()
   const panel = useRef<HTMLElement>(null)
   const closeBtn = useRef<HTMLButtonElement>(null)
@@ -51,11 +48,11 @@ function Booth({ onClose }: { onClose: () => void }) {
     <>
       <motion.div
         aria-hidden="true"
-        className="fixed inset-0 z-[70] bg-black/75"
+        className="fixed inset-0 z-[70] bg-ink/40"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.3 }}
         onClick={onClose}
       />
       <motion.aside
@@ -63,74 +60,35 @@ function Booth({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="ai-h"
-        className="fixed inset-y-0 right-0 z-[75] w-full max-w-[640px] overflow-y-auto overscroll-contain"
-        initial={{ x: '105%' }}
+        className="fixed inset-y-0 right-0 z-[75] w-full max-w-[540px] overflow-y-auto overscroll-contain bg-paper shadow-[-30px_0_60px_-34px_rgb(30_33_40/0.55)]"
+        initial={{ x: '102%' }}
         animate={{ x: 0 }}
-        exit={{ x: '105%' }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        exit={{ x: '102%' }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* the booth: a hooded shell with the script inside */}
-        <div
-          className="relative mx-3 mt-10 flex min-h-[calc(100%-2.5rem)] flex-col sm:mx-5 sm:mt-14 sm:min-h-[calc(100%-3.5rem)]"
-          style={{
-            borderRadius: '50% 50% 0 0 / 130px 130px 0 0',
-            padding: '10px 10px 0',
-            background: 'linear-gradient(180deg, #8a6a30, #4a3219 18%, #2e1d0f)',
-            boxShadow: '0 0 80px rgb(255 207 122 / 0.14), -20px 0 60px rgb(0 0 0 / 0.7)',
-          }}
-        >
-          <div
-            className="relative flex-1 overflow-hidden px-7 pb-24 pt-28 sm:px-12 sm:pt-32"
-            style={{
-              borderRadius: '50% 50% 0 0 / 122px 122px 0 0',
-              background:
-                'radial-gradient(ellipse 70% 40% at 50% 0%, rgb(255 207 122 / 0.28), rgb(255 207 122 / 0.05) 60%, transparent 85%), linear-gradient(180deg, #120b07, #070405)',
-              boxShadow: 'inset 0 10px 40px rgb(0 0 0 / 0.8)',
-            }}
-          >
-            {/* lamp */}
-            <div aria-hidden="true" className="absolute left-1/2 top-7 -translate-x-1/2 sm:top-9">
-              <div className="mx-auto h-2 w-10 rounded-full bg-brass" />
-              <div className="mx-auto h-3 w-3 -translate-y-px rounded-b-full bg-lamp shadow-[0_0_22px_10px_rgb(255_207_122/0.6)]" />
-            </div>
+        <div className="px-7 pb-16 pt-24 sm:px-12">
+          <h2 id="ai-h" className="text-[clamp(2.5rem,6vw,3.4rem)] font-semibold leading-none tracking-[-0.035em]">
+            {t.ai.heading}
+          </h2>
+          <p className="mt-6 max-w-[42ch] text-[1.15rem] text-body">{t.ai.intro}</p>
 
-            <header className="text-center">
-              <h2 id="ai-h" className="text-glow font-display text-5xl font-semibold italic text-brass sm:text-6xl">
-                {t.ai.heading}
-              </h2>
-              <p className="mt-4 font-display text-2xl text-bone">{t.ai.tagline}</p>
-              <p className="mx-auto mt-4 max-w-[44ch] text-balance text-[1.05rem] text-bone-dim">{t.ai.intro}</p>
-            </header>
+          <h3 className="mt-12 font-display text-[1.05rem] font-semibold">{t.ai.helpsTitle}</h3>
+          <ul className="mt-4 divide-y divide-rule border-y border-rule">
+            {t.ai.helps.map((line) => (
+              <li key={line} className="py-3.5 text-[1.05rem] text-body">
+                {line}
+              </li>
+            ))}
+          </ul>
 
-            <div className="mt-12 font-script text-bone">
-              <p className="mb-10 text-center text-sm font-bold text-brass">{t.ai.scene}</p>
-
-              <div className="space-y-12">
-                <Speaker
-                  name={t.ai.prompterName}
-                  direction={t.ai.prompterDirection}
-                  lines={t.ai.prompterItems}
-                  tone="text-bone/85 italic"
-                  delay={0.7}
-                />
-                <Speaker
-                  name={t.ai.actorName}
-                  direction={t.ai.actorDirection}
-                  lines={t.ai.actorItems}
-                  tone="text-bone"
-                  delay={1.5}
-                />
-              </div>
-
-              <p className="mt-14 text-center text-sm italic text-brass">{t.ai.curtain}</p>
-            </div>
-          </div>
-
-          {/* footlights along the bottom edge of the booth */}
-          <div aria-hidden="true" className="relative -mx-[10px]">
-            <div className="stage-floor h-12" />
-            <div className="footlights absolute inset-x-0 top-3 h-4" />
-          </div>
+          <h3 className="mt-12 font-display text-[1.05rem] font-semibold">{t.ai.ownTitle}</h3>
+          <ul className="mt-4 space-y-3.5 border-l-2 border-accent pl-5">
+            {t.ai.own.map((line) => (
+              <li key={line} className="text-[1.05rem] text-ink">
+                {line}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <button
@@ -138,45 +96,11 @@ function Booth({ onClose }: { onClose: () => void }) {
           type="button"
           onClick={onClose}
           aria-label={t.ai.close}
-          className="fixed right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-brass/50 bg-stage/85 text-brass transition-colors hover:bg-brass hover:text-stage"
+          className="fixed right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-rule bg-sheet text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
         >
           <X size={20} />
         </button>
       </motion.aside>
     </>
-  )
-}
-
-function Speaker({
-  name,
-  direction,
-  lines,
-  tone,
-  delay,
-}: {
-  name: string
-  direction: string
-  lines: string[]
-  tone: string
-  delay: number
-}) {
-  return (
-    <div>
-      <p className="text-center text-base font-bold text-brass">{name.toUpperCase()}</p>
-      <p className="text-center text-sm italic text-bone-dim">{direction}</p>
-      <ul className="mx-auto mt-5 max-w-[38ch] space-y-4">
-        {lines.map((line, i) => (
-          <motion.li
-            key={line}
-            className={`text-[0.98rem] leading-[1.7] sm:text-base ${tone}`}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: delay + i * 0.14 }}
-          >
-            {line}
-          </motion.li>
-        ))}
-      </ul>
-    </div>
   )
 }

@@ -1,17 +1,23 @@
 import { site } from '../data/site'
 import { useLang } from '../i18n/LanguageContext'
 
-export function Footer() {
+export function Footer({ onOpenAi }: { onOpenAi: () => void }) {
   const { t } = useLang()
   return (
-    <footer id="the-end" className="relative overflow-hidden bg-black pb-32 pt-4 text-center">
-      <div aria-hidden="true" className="bulb-row mx-auto mb-10 h-4 w-64" />
-      <p className="text-glow font-display text-6xl font-semibold italic text-brass sm:text-7xl">{t.footer.end}</p>
-      <div className="mx-auto mt-14 max-w-xl px-[calc(var(--drape-w)+1.25rem)] text-sm text-bone-dim">
-        <p>{t.footer.built}</p>
-        <p className="mt-2">
+    <footer className="border-t border-rule">
+      <div className="mx-auto flex max-w-[1240px] flex-col gap-3 px-6 py-10 text-[0.95rem] text-muted md:flex-row md:items-center md:justify-between md:px-12">
+        <p>
           © {new Date().getFullYear()} {site.name}. {t.footer.rights}
         </p>
+        <p>{t.footer.built}</p>
+        <button
+          type="button"
+          onClick={onOpenAi}
+          aria-haspopup="dialog"
+          className="link-underline self-start font-display font-medium text-ink"
+        >
+          {t.nav.ai}
+        </button>
       </div>
     </footer>
   )

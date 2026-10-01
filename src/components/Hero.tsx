@@ -1,71 +1,71 @@
-import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowDown } from 'lucide-react'
 import { useLang } from '../i18n/LanguageContext'
+import { Dimension } from './Dimension'
 
-const lines = ['Maksymilian', 'Kościelniak']
+const EASE = [0.2, 0.7, 0.2, 1] as const
 
-export function Hero({ opened }: { opened: boolean }) {
+/** One line of the headline, rising out of a mask. */
+function Line({ children, delay }: { children: ReactNode; delay: number }) {
+  const reduce = useReducedMotion()
+  return (
+    <span className="-my-[0.1em] block overflow-hidden py-[0.1em]">
+      <motion.span
+        className="block"
+        initial={reduce ? false : { y: '108%' }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1, delay, ease: EASE }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  )
+}
+
+export function Hero() {
   const { t } = useLang()
+  const reduce = useReducedMotion()
+  const fade = (delay: number) => ({
+    initial: reduce ? false : { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.9, delay },
+  })
 
   return (
-    <section
-      id="top"
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 pb-28 pt-28 text-center"
-    >
-      {/* spotlight */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-[115%] w-[130%] -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: opened ? 1 : 0 }}
-        transition={{ duration: 2, delay: opened ? 1.2 : 0 }}
-        style={{
-          clipPath: 'polygon(44% 0, 56% 0, 88% 100%, 12% 100%)',
-          background: 'linear-gradient(180deg, rgb(255 226 170 / 0.2), rgb(255 226 170 / 0.05) 70%, transparent)',
-          filter: 'blur(3px)',
-        }}
-      />
+    <section id="top" aria-label="Maksymilian Kościelniak" className="relative">
+      <div aria-hidden="true" className="dot-grid absolute inset-x-0 top-0 h-[88%]" />
+      <div className="relative mx-auto max-w-[1240px] px-6 pb-20 pt-32 md:px-12 md:pb-28 md:pt-44">
+        {/* the dimension line below measures the name: it is exactly as wide as the longest line */}
+        <div className="block md:inline-block md:max-w-full">
+          <h1 className="text-[clamp(3.1rem,10.6vw,9.75rem)] font-semibold leading-[0.9] tracking-[-0.038em]">
+            <Line delay={0.1}>Maksymilian</Line>
+            <Line delay={0.22}>Kościelniak</Line>
+          </h1>
+          <Dimension className="mt-7 md:mt-9" label={t.hero.where} draw delay={0.9} />
+        </div>
 
-      <div className="relative z-10">
-        <h1 className="font-display text-[clamp(2.7rem,12.5vw,8.75rem)] font-semibold leading-[0.95] tracking-tight text-bone">
-          {lines.map((line, i) => (
-            <span key={line} className="block overflow-hidden pb-[0.08em]">
-              <motion.span
-                className="block"
-                initial={{ y: '105%' }}
-                animate={{ y: opened ? 0 : '105%' }}
-                transition={{ duration: 1.1, delay: opened ? 1.4 + i * 0.18 : 0, ease: [0.2, 0.8, 0.2, 1] }}
+        <motion.div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-12" {...fade(0.8)}>
+          <p className="font-body text-[clamp(1.45rem,2.4vw,2rem)] italic leading-snug text-ink md:col-span-6">
+            {t.hero.role}
+          </p>
+          <div className="md:col-span-5 md:col-start-8">
+            <p className="max-w-[44ch] text-[1.2rem] text-body">{t.hero.tagline}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-display text-[0.98rem] font-semibold text-paper transition-colors hover:bg-accent"
               >
-                {line}
-              </motion.span>
-            </span>
-          ))}
-        </h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: opened ? 1 : 0, y: opened ? 0 : 10 }}
-          transition={{ duration: 0.9, delay: opened ? 2.3 : 0 }}
-        >
-          <p className="mt-8 text-balance font-display text-2xl italic text-brass sm:text-3xl">{t.hero.role}</p>
-          <p className="mx-auto mt-4 max-w-[38ch] text-balance text-lg text-bone-dim sm:text-xl">{t.hero.tagline}</p>
-          <a
-            href="#projects"
-            className="mt-10 inline-flex items-center gap-2 rounded-full border border-brass/70 px-7 py-3 text-lg text-bone transition-colors hover:bg-brass hover:text-stage"
-          >
-            {t.hero.cta}
-            <ChevronDown size={18} aria-hidden="true" />
-          </a>
+                {t.hero.ctaProjects}
+                <ArrowDown size={17} aria-hidden="true" />
+              </a>
+              <a href="#contact" className="link-underline font-display text-[0.98rem] font-semibold text-ink">
+                {t.hero.ctaContact}
+              </a>
+            </div>
+          </div>
         </motion.div>
-      </div>
 
-      {/* stage floor and footlights */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24">
-        <div
-          className="stage-floor absolute inset-0"
-          style={{ maskImage: 'linear-gradient(180deg, transparent, #000 45%)', WebkitMaskImage: 'linear-gradient(180deg, transparent, #000 45%)' }}
-        />
-        <div className="footlights absolute inset-x-0 bottom-5 h-4" />
       </div>
     </section>
   )

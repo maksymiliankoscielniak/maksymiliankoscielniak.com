@@ -1,6 +1,6 @@
 # maksymiliankoscielniak.com
 
-Cinema-and-theatre portfolio of Maksymilian Kościelniak.
+Design-led portfolio of Maksymilian Kościelniak: cool paper, graphite ink, one ultramarine accent, and dimension lines as the one drawn motif.
 Vite + React + TypeScript + Tailwind CSS v4 + framer-motion + lucide-react.
 
 ```bash
@@ -17,25 +17,19 @@ npm run preview    # serve dist/ locally
 | All copy, EN + PL (English is the default) | `src/i18n/copy.ts` |
 | Project list, descriptions, links | `src/data/projects.ts` |
 | GitHub, LinkedIn, e-mail | `src/data/site.ts` |
-| Poster artwork (SVG, one per project) | `src/components/PosterArt.tsx` |
+| Project screenshots (16:9 crops) | `src/assets/screens/` |
 | Colours and fonts | `@theme` block in `src/index.css` |
-
-## Still to fill in
-
-- `src/data/site.ts`: real GitHub / LinkedIn URLs and e-mail (currently placeholders).
-- `src/data/projects.ts`: `href` for each project link (links with an empty `href` are hidden).
-- `src/i18n/copy.ts`: read through the About and AI-policy text, it is a first draft.
 
 ## Sections
 
-- **Curtain**: opens on load (or on click / key press) and settles into the drapes that frame the page.
-- **About**: a scroll-driven trailer with title cards, then a lectern with a short bio and stack.
-- **Projects ("Now showing")**: one CRT television per project; click a screen for the full poster.
-- **AI policy**: lives off the main page. A stage door on the right edge (and the nav link) rolls in the prompter's box from the side. Deep link: `/#ai`.
-- **Credits**: GitHub, LinkedIn, e-mail.
-- **Language switch**: a strip of film that advances one frame (EN / PL). The choice is remembered in `localStorage`.
+- **Hero**: the name, set large; a dimension line under it measures the name and carries a caption. The only motion on load.
+- **Selected work**: one plate per project (screenshot, short description, stack, live demo and source links). Each plate has its own dimension line naming what kind of project it is.
+- **About**: a short bio, the stack, and a signature.
+- **Contact**: e-mail (with a copy button), GitHub, LinkedIn.
+- **AI policy**: lives off the main page. A tab on the right edge (a small pill on phones, plus a link in the footer) slides in a drawer. Deep link: `/#ai`.
+- **Language switch**: EN / PL in the header. The choice is remembered in `localStorage`.
 
-`prefers-reduced-motion` is respected: no curtain, static trailer cards, no flicker or grain.
+`prefers-reduced-motion` is respected: the headline and dimension line simply appear.
 
 ## Deploy to GitHub Pages
 

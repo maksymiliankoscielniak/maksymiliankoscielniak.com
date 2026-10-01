@@ -1,50 +1,46 @@
-@import '@fontsource/bodoni-moda/400.css';
-@import '@fontsource/bodoni-moda/400-italic.css';
-@import '@fontsource/bodoni-moda/600.css';
-@import '@fontsource/bodoni-moda/700.css';
+@import '@fontsource-variable/bricolage-grotesque/opsz.css';
 @import '@fontsource/newsreader/400.css';
 @import '@fontsource/newsreader/400-italic.css';
 @import '@fontsource/newsreader/500.css';
-@import '@fontsource/courier-prime/400.css';
-@import '@fontsource/courier-prime/400-italic.css';
-@import '@fontsource/courier-prime/700.css';
 @import '@fontsource/allura/400.css';
 @import 'tailwindcss';
 
+/*
+ * Drafting-table palette: cool paper, graphite ink, one ultramarine pen,
+ * and the pale "non-photo" blue designers use for construction lines.
+ */
 @theme {
-  --color-stage: #0b0708;
-  --color-stage-2: #140d0f;
-  --color-velvet: #6d0f20;
-  --color-velvet-deep: #3a0712;
-  --color-velvet-lit: #a1213a;
-  --color-brass: #d1ad66;
-  --color-brass-dim: #8f7440;
-  --color-bone: #efe6d3;
-  --color-bone-dim: #b9ae99;
-  --color-lamp: #ffcf7a;
+  --color-paper: #f4f5f2;
+  --color-sheet: #fbfbf9;
+  --color-ink: #1e2128;
+  --color-body: #383d47;
+  --color-muted: #646974;
+  --color-rule: #d6d9de;
+  --color-accent: #2e3fd6;
+  --color-accent-deep: #1f2ba6;
+  --color-pencil: #b4c0f1;
+  --color-wash: #e5e8f9;
 
-  --font-display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-script: 'Courier Prime', 'Courier New', monospace;
   --font-signature: 'Allura', 'Segoe Script', 'Brush Script MT', cursive;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background: var(--color-stage);
-    color-scheme: dark;
-    /* keep the layout width the same whether or not the page can scroll, so nothing shifts when the curtain unlocks it */
+    background: var(--color-paper);
+    color-scheme: light;
+    /* same layout width whether or not the page scrolls (drawer locks scrolling) */
     scrollbar-gutter: stable;
-    scrollbar-color: #5a4424 #0b0708;
   }
   body {
     margin: 0;
-    background: var(--color-stage);
-    color: var(--color-bone);
+    background: var(--color-paper);
+    color: var(--color-body);
     font-family: var(--font-body);
     font-size: 1.125rem;
-    line-height: 1.65;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
@@ -52,14 +48,24 @@
   body.is-locked {
     overflow: hidden;
   }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-optical-sizing: auto;
+  }
   ::selection {
-    background: var(--color-velvet-lit);
-    color: var(--color-bone);
+    background: var(--color-accent);
+    color: #fff;
   }
   :focus-visible {
-    outline: 2px solid var(--color-brass);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 4px;
+  }
+  section[id] {
+    scroll-margin-top: 6rem;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -68,171 +74,40 @@
   }
 }
 
-/* ───────── Velvet ───────── */
-
-/*
- * Velvet with a fixed number of pleats (percentages, not pixels), so the same
- * element looks right at any width: the curtain half while it gathers and the
- * permanent side drape it ends up as are literally the same pattern.
- */
-.velvet {
-  background:
-    linear-gradient(
-      90deg,
-      rgb(0 0 0 / 0.5) 0%,
-      rgb(0 0 0 / 0) 18%,
-      rgb(0 0 0 / 0) 82%,
-      rgb(0 0 0 / 0.42) 100%
-    ),
-    linear-gradient(
-      90deg,
-      #2a050c 0.000%,
-      #6a0f22 5.000%,
-      #a1213a 8.333%,
-      #6a0f22 12.000%,
-      #2a050c 16.667%,
-      #6a0f22 21.667%,
-      #952038 25.000%,
-      #6a0f22 28.667%,
-      #2a050c 33.333%,
-      #6a0f22 38.333%,
-      #a1213a 41.667%,
-      #6a0f22 45.333%,
-      #2a050c 50.000%,
-      #6a0f22 55.000%,
-      #952038 58.333%,
-      #6a0f22 62.000%,
-      #2a050c 66.667%,
-      #6a0f22 71.667%,
-      #a1213a 75.000%,
-      #6a0f22 78.667%,
-      #2a050c 83.333%,
-      #6a0f22 88.333%,
-      #952038 91.667%,
-      #6a0f22 95.333%,
-      #2a050c 100%
-    );
+/* A faint dot grid, like the canvas of a layout tool, fading out downwards */
+.dot-grid {
+  background-image: radial-gradient(circle, #c4cad6 1px, transparent 1.3px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);
 }
-.velvet::after {
+
+/* Dimension line: a ruled line with end ticks and a caption sitting in a gap */
+.dim-line {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: var(--color-pencil);
+}
+.dim-line::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.45), transparent 22%, transparent 70%, rgb(0 0 0 / 0.55));
-  pointer-events: none;
+  top: -6px;
+  width: 1px;
+  height: 13px;
+  background: var(--color-pencil);
+}
+.dim-line-start::before {
+  left: 0;
+}
+.dim-line-end::before {
+  right: 0;
 }
 
-/* ───────── Film grain ───────── */
-.grain {
-  position: absolute;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  pointer-events: none;
-  opacity: 0.11;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  animation: grain-shift 0.9s steps(6) infinite;
+.link-underline {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.3s ease;
 }
-@keyframes grain-shift {
-  0% { transform: translate(0, 0); }
-  17% { transform: translate(-6%, 4%); }
-  34% { transform: translate(5%, -7%); }
-  51% { transform: translate(-4%, -3%); }
-  68% { transform: translate(7%, 5%); }
-  85% { transform: translate(-3%, 8%); }
-  100% { transform: translate(0, 0); }
-}
-
-/* ───────── CRT television ───────── */
-.tv-body {
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.08), transparent 18%, rgb(0 0 0 / 0.35)),
-    repeating-linear-gradient(92deg, rgb(0 0 0 / 0.0) 0 5px, rgb(0 0 0 / 0.12) 5px 6px),
-    linear-gradient(135deg, #5a3b25, #3a2416 55%, #28170d);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.18),
-    inset 0 -6px 14px rgb(0 0 0 / 0.5),
-    0 30px 50px -18px rgb(0 0 0 / 0.9),
-    0 0 0 1px rgb(0 0 0 / 0.6);
-}
-.tv-screen {
-  background: #050304;
-  box-shadow:
-    inset 0 0 0 2px rgb(0 0 0 / 0.9),
-    inset 0 0 28px 6px rgb(0 0 0 / 0.85),
-    0 0 0 3px #1b110a,
-    0 0 0 4px rgb(255 255 255 / 0.08);
-}
-.tv-scanlines {
-  background: repeating-linear-gradient(180deg, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 3px);
-  mix-blend-mode: multiply;
-}
-.tv-glare {
-  background:
-    radial-gradient(120% 70% at 25% 0%, rgb(255 255 255 / 0.22), transparent 55%),
-    radial-gradient(90% 90% at 50% 50%, transparent 55%, rgb(0 0 0 / 0.55) 100%);
-}
-.tv-roll {
-  background: linear-gradient(180deg, transparent, rgb(255 255 255 / 0.07) 50%, transparent);
-  height: 28%;
-  animation: tv-roll 7s linear infinite;
-}
-@keyframes tv-roll {
-  from { transform: translateY(-120%); }
-  to { transform: translateY(420%); }
-}
-.tv-flicker {
-  animation: tv-flicker 5.5s infinite;
-}
-@keyframes tv-flicker {
-  0%, 93%, 100% { opacity: 1; }
-  94% { opacity: 0.93; }
-  96% { opacity: 1; }
-  97% { opacity: 0.9; }
-}
-.tv-static {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='1' seed='4'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='linear' slope='1'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  background-size: 180px 180px;
-  animation: tv-static 0.22s steps(4) infinite;
-}
-@keyframes tv-static {
-  0% { background-position: 0 0; }
-  25% { background-position: -40px 25px; }
-  50% { background-position: 30px -50px; }
-  75% { background-position: -60px -20px; }
-  100% { background-position: 20px 40px; }
-}
-
-/* ───────── Stage floor & footlights ───────── */
-.stage-floor {
-  background:
-    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.0) 0 118px, rgb(0 0 0 / 0.55) 118px 120px),
-    linear-gradient(180deg, #2a1810, #1a0f09 70%, #0e0805);
-}
-.footlights {
-  background: radial-gradient(circle at 50% 50%, #fff2c8 0 2px, var(--color-lamp) 3px, rgb(255 207 122 / 0) 7px) 0 0 / 34px 14px repeat-x;
-  filter: drop-shadow(0 0 6px rgb(255 207 122 / 0.8));
-}
-
-/* ───────── Misc ───────── */
-.text-glow {
-  text-shadow: 0 0 28px rgb(209 173 102 / 0.35);
-}
-.bulb-row {
-  background: radial-gradient(circle, #fff6d8 0 2px, var(--color-lamp) 3px, rgb(255 207 122 / 0) 6px) 0 50% / 22px 14px repeat-x;
-  filter: drop-shadow(0 0 5px rgb(255 207 122 / 0.75));
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .grain,
-  .tv-roll,
-  .tv-flicker,
-  .tv-static {
-    animation: none;
-  }
-}
-
-:root {
-  /* Width of the velvet drapes that frame the page. Mirrored in src/components/drapeWidth.ts */
-  --drape-w: clamp(10px, 3.6vw, 60px);
+.link-underline:hover {
+  background-size: 100% 2px;
 }

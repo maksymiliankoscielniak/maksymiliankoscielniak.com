@@ -1,72 +1,57 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { DoorOpen } from 'lucide-react'
 import { useLang } from '../i18n/LanguageContext'
 
 /**
- * A small stage door on the right-hand edge of the page. It leads to the
- * prompter's box (the AI policy), which stays off the main page.
+ * A quiet tab on the right-hand edge of the page. It opens the AI policy,
+ * which stays off the main page. On small screens it is a small pill instead.
  */
-export function AiDoor({ visible, onOpen }: { visible: boolean; onOpen: () => void }) {
+export function AiDoor({
+  visible,
+  hideMobile = false,
+  onOpen,
+}: {
+  visible: boolean
+  /** hide the small-screen pill (e.g. once the footer link is on screen) */
+  hideMobile?: boolean
+  onOpen: () => void
+}) {
   const { t } = useLang()
 
   return (
     <AnimatePresence>
       {visible && (
         <>
-          {/* desktop: vertical plaque on the edge */}
           <motion.button
-            key="door-desktop"
+            key="tab-desktop"
             type="button"
             onClick={onOpen}
             aria-haspopup="dialog"
-            className="group fixed z-[45] hidden flex-col items-center gap-3 rounded-l-[26px] border border-r-0 border-brass/55 px-2.5 pb-5 pt-4 md:flex"
-            style={{
-              right: 'calc(var(--drape-w) - 6px)',
-              top: '50%',
-              y: '-50%',
-              background: 'linear-gradient(90deg, #3a2416, #2a170c)',
-              boxShadow: '0 0 28px rgb(255 207 122 / 0.14), 0 10px 30px rgb(0 0 0 / 0.6)',
-            }}
-            initial={{ x: 70, opacity: 0 }}
+            className="fixed right-0 top-1/2 z-[45] hidden rounded-l-xl bg-ink px-2.5 py-5 font-display text-[0.88rem] font-semibold tracking-[0.02em] text-paper transition-colors hover:bg-accent md:block"
+            style={{ y: '-50%', writingMode: 'vertical-rl' }}
+            initial={{ x: 48, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 70, opacity: 0 }}
-            whileHover={{ x: -6 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 22, delay: 0.4 }}
+            exit={{ x: 48, opacity: 0 }}
+            whileHover={{ x: -4 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 24, delay: 1.8 }}
           >
-            <DoorOpen size={18} className="text-brass" aria-hidden="true" />
-            <span
-              className="font-script text-sm font-bold tracking-wide text-brass"
-              style={{ writingMode: 'vertical-rl' }}
-            >
-              {t.nav.ai}
-            </span>
-            <span
-              aria-hidden="true"
-              className="block h-2.5 w-2.5 rounded-full bg-lamp shadow-[0_0_10px_3px_rgb(255_207_122/0.55)] transition-shadow group-hover:shadow-[0_0_16px_6px_rgb(255_207_122/0.75)]"
-            />
-          </motion.button>
-
-          {/* mobile: compact door in the corner */}
-          <motion.button
-            key="door-mobile"
-            type="button"
-            onClick={onOpen}
-            aria-haspopup="dialog"
-            className="fixed z-[45] flex items-center gap-2 rounded-full border border-brass/60 py-2 pl-3 pr-4 font-script text-sm font-bold text-brass md:hidden"
-            style={{
-              right: 'calc(var(--drape-w) + 0.75rem)',
-              bottom: '1rem',
-              background: 'linear-gradient(90deg, #3a2416, #2a170c)',
-              boxShadow: '0 0 22px rgb(255 207 122 / 0.14), 0 8px 24px rgb(0 0 0 / 0.6)',
-            }}
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 30, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <DoorOpen size={16} aria-hidden="true" />
             {t.nav.ai}
           </motion.button>
+
+          {!hideMobile && (
+          <motion.button
+            key="tab-mobile"
+            type="button"
+            onClick={onOpen}
+            aria-haspopup="dialog"
+            className="fixed bottom-4 right-4 z-[45] rounded-full bg-ink px-4 py-2.5 font-display text-[0.9rem] font-semibold text-paper shadow-[0_6px_20px_-8px_rgb(30_33_40/0.6)] md:hidden"
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 24, opacity: 0 }}
+            transition={{ duration: 0.4, delay: 1.8 }}
+          >
+            {t.nav.ai}
+          </motion.button>
+          )}
         </>
       )}
     </AnimatePresence>
