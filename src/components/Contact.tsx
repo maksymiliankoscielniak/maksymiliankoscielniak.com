@@ -3,6 +3,7 @@ import { Check, Copy, Mail } from 'lucide-react'
 import { site } from '../data/site'
 import { useLang } from '../i18n/LanguageContext'
 import { Dimension } from './Dimension'
+import { HeroField } from './HeroField'
 
 function GithubIcon({ size = 20 }: { size?: number }) {
   return (
@@ -44,7 +45,16 @@ export function Contact() {
   ]
 
   return (
-    <section id="contact" aria-label={t.contact.heading} className="mx-auto max-w-[1240px] px-6 pb-24 md:px-12 md:pb-32">
+    <section id="contact" aria-label={t.contact.heading} className="relative">
+      <HeroField
+        className="absolute inset-x-0 bottom-0 h-[78%] w-full"
+        style={{ WebkitMaskImage: 'linear-gradient(0deg,#000 0,#000 45%,transparent 100%)', maskImage: 'linear-gradient(0deg,#000 0,#000 45%,transparent 100%)' }}
+        top={0.3}
+        topSmall={0.4}
+        amp={0.8}
+        alpha={0.55}
+      />
+      <div className="relative mx-auto max-w-[1240px] px-6 pb-28 md:px-12 md:pb-40">
       <Dimension as="h2" label={t.contact.heading} />
       <div className="mt-14 md:mt-20">
         <p className="max-w-[18ch] text-balance font-display text-[clamp(2.5rem,6.4vw,5.6rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">
@@ -86,6 +96,7 @@ export function Contact() {
               </li>
             ))}
         </ul>
+      </div>
       </div>
     </section>
   )

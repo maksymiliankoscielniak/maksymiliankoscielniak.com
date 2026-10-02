@@ -1,6 +1,13 @@
+import type { PointerEvent as ReactPointerEvent } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext'
 import { Dimension } from './Dimension'
+
+const spotlight = (e: ReactPointerEvent<HTMLElement>) => {
+  const r = e.currentTarget.getBoundingClientRect()
+  e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+  e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+}
 
 const num = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -22,7 +29,8 @@ export function Services() {
           <motion.li
             key={it.title}
             {...reveal(i)}
-            className="group flex flex-col rounded-2xl border border-rule bg-sheet p-6 transition-colors duration-300 hover:border-accent/60 md:p-7"
+            onPointerMove={spotlight}
+            className="spot group flex flex-col rounded-2xl border border-rule bg-sheet p-6 transition-colors duration-300 hover:border-accent/60 md:p-7"
           >
             <span className="font-display text-[0.9rem] font-medium tabular-nums text-accent">{num(i)}</span>
             <h3 className="mt-10 text-[1.45rem] font-semibold leading-tight tracking-[-0.02em]">{it.title}</h3>

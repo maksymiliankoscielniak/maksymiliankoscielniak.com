@@ -22,7 +22,7 @@ npm run preview    # serve dist/ locally
 
 ## Sections
 
-- **Hero**: the name as a neon sign, lowered on two cables, swinging, then powering on (one letter is on its way out; see `.neon-*` in `src/index.css`), over an animated field of mint ridgelines drawn on a canvas (`src/components/HeroField.tsx`). It follows the pointer, pauses when off screen or in a background tab, and is a still frame with reduced motion. A dimension line under the name measures it and carries a caption.
+- **Hero**: the name as a neon sign: thin neon-tube script (Sacramento) on an unlit steel lattice plate, lowered on two cables, swinging, then powering on (one letter is on its way out; see `.neon-*` and `.sign-plate` in `src/index.css`; the script is `--font-neon`), over an animated field of mint ridgelines drawn on a canvas (`src/components/HeroField.tsx`). The ridgelines follow the pointer, fade out before the next section, and reappear, calmer, behind Contact. They pause when off screen or in a background tab, and is a still frame with reduced motion. A dimension line under the name measures it and carries a caption.
 - **Selected work**: one plate per project (screenshot, short description, stack, live demo and source links). Each plate has its own dimension line naming what kind of project it is.
 - **Services**: what I build (four cards) and how I work (four steps). Copy lives in `services` and `process` in `src/i18n/copy.ts`.
 - **About**: a short bio, the stack, and a signature.

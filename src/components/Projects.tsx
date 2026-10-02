@@ -6,7 +6,7 @@ import { Dimension } from './Dimension'
 export function Projects() {
   const { t } = useLang()
   return (
-    <section id="projects" aria-label={t.work.heading} className="mx-auto max-w-[1240px] px-6 pb-24 md:px-12 md:pb-36">
+    <section id="projects" aria-label={t.work.heading} className="relative mx-auto max-w-[1240px] px-6 pb-24 md:px-12 md:pb-36">
       <Dimension as="h2" label={t.work.heading} />
       <ul className="mt-14 space-y-24 md:mt-20 md:space-y-36">
         {projects.map((p, i) => (

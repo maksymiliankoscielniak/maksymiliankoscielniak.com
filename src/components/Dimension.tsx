@@ -22,7 +22,7 @@ export function Dimension({
   return (
     <div className={`flex items-center gap-4 text-muted ${className}`}>
       <Rule side="start" draw={draw} delay={delay} />
-      <Tag className="max-w-[80%] text-center font-display text-[0.95rem] font-medium leading-snug tracking-[0.01em]">
+      <Tag className="max-w-[80%] text-center font-display [text-shadow:0_0_10px_var(--color-paper),0_0_5px_var(--color-paper)] text-[0.95rem] font-medium leading-snug tracking-[0.01em]">
         {draw ? (
           <motion.span
             className="inline-block"

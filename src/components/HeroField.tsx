@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type CSSProperties } from 'react'
 
 const BG = '#060908'
 const MINT = '111, 240, 192'
@@ -9,7 +9,26 @@ const MINT = '111, 240, 192'
  * and the surface swells gently towards the pointer.
  * Runs only while visible; with reduced motion it renders one still frame.
  */
-export function HeroField({ className = '' }: { className?: string }) {
+export function HeroField({
+  className = '',
+  style,
+  top: topFrac = 0.1,
+  topSmall = 0.28,
+  bottom: bottomFrac = 1.02,
+  amp: ampScale = 1,
+  alpha: alphaScale = 1,
+}: {
+  className?: string
+  style?: CSSProperties
+  /** where the farthest ridge sits, as a fraction of the height (wide / narrow screens) */
+  top?: number
+  topSmall?: number
+  /** where the nearest ridge sits, as a fraction of the height */
+  bottom?: number
+  /** multipliers for ridge height and line opacity */
+  amp?: number
+  alpha?: number
+}) {
   const ref = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -44,8 +63,8 @@ export function HeroField({ className = '' }: { className?: string }) {
       const small = w < 700
       const rows = small ? 26 : 42
       const step = small ? 9 : 7
-      const top = h * (small ? 0.46 : 0.34)
-      const bottom = h * 1.02
+      const top = h * (small ? topSmall : topFrac)
+      const bottom = h * bottomFrac
       const gap = (bottom - top) / (rows - 1)
       const cols = Math.ceil(w / step) + 1
       const aspect = w / h
@@ -54,7 +73,7 @@ export function HeroField({ className = '' }: { className?: string }) {
       for (let r = 0; r < rows; r++) {
         const depth = r / (rows - 1) // 0 far, 1 near
         const baseY = top + r * gap
-        const amp = gap * (1.2 + depth * 5.2)
+        const amp = gap * (1.2 + depth * 4.4) * ampScale
         const ys = new Float32Array(cols)
         for (let i = 0; i < cols; i++) {
           const nx = i / (cols - 1)
@@ -87,7 +106,7 @@ export function HeroField({ className = '' }: { className?: string }) {
         ctx.beginPath()
         ctx.moveTo(0, ys[0])
         for (let i = 1; i < cols; i++) ctx.lineTo((i / (cols - 1)) * w, ys[i])
-        ctx.strokeStyle = `rgba(${MINT}, ${(0.1 + depth * depth * 0.72).toFixed(3)})`
+        ctx.strokeStyle = `rgba(${MINT}, ${((0.1 + depth * depth * 0.72) * alphaScale).toFixed(3)})`
         ctx.lineWidth = 0.8 + depth * 0.7
         ctx.stroke()
       }
@@ -152,9 +171,9 @@ export function HeroField({ className = '' }: { className?: string }) {
       document.removeEventListener('pointerleave', onLeave)
       document.removeEventListener('visibilitychange', onVisibility)
     }
-  }, [])
+  }, [topFrac, topSmall, bottomFrac, ampScale, alphaScale])
 
-  return <canvas ref={ref} aria-hidden="true" className={className} />
+  return <canvas ref={ref} aria-hidden="true" className={className} style={style} />
 }
 
 function smooth(a: number, b: number, x: number) {
