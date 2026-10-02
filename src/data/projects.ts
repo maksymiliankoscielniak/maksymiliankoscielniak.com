@@ -65,8 +65,8 @@ export const projects: Project[] = [
     kind: { en: 'Training planner', pl: 'Planer treningowy' },
     tagline: { en: 'Sketch. Paint. Carve.', pl: 'Szkicuj. Maluj. Rzeźb.' },
     description: {
-      en: 'An art-inspired hypertrophy planner: sketch your split on parchment, paint your exercise selection in oil, then carve the final physique in marble. Built with React and TypeScript, with no backend – all data stays in the browser.',
-      pl: 'Planer hipertrofii inspirowany sztuką: naszkicuj split na pergaminie, namaluj wybór ćwiczeń olejem, a na końcu wyrzeźb sylwetkę w marmurze. Zbudowany w React i TypeScript, bez backendu – wszystkie dane zostają w przeglądarce.',
+      en: 'An art-inspired hypertrophy planner: sketch your split on parchment, paint your exercise selection in oil, then carve the final physique in marble. Built with React and TypeScript, with no backend - all data stays in the browser.',
+      pl: 'Planer hipertrofii inspirowany sztuką: naszkicuj split na pergaminie, namaluj wybór ćwiczeń olejem, a na końcu wyrzeźb sylwetkę w marmurze. Zbudowany w React i TypeScript, bez backendu - wszystkie dane zostają w przeglądarce.',
     },
     stack: ['React', 'TypeScript'],
     screen: { src: gymgalleryScreen, position: 'center' },
@@ -81,8 +81,8 @@ export const projects: Project[] = [
     kind: { en: 'Calculator and library', pl: 'Kalkulator i biblioteka' },
     tagline: { en: 'Half-life, explained.', pl: 'Okres półtrwania, wyjaśniony.' },
     description: {
-      en: 'A clean, client-side reconstitution calculator and educational compound library with a goal finder and half-life simulator. Deployed on GitHub Pages. Educational only – not medical advice.',
-      pl: 'Czysty, działający po stronie klienta kalkulator rekonstytucji oraz edukacyjna biblioteka związków z wyszukiwarką celów i symulatorem okresu półtrwania. Wdrożony na GitHub Pages. Wyłącznie w celach edukacyjnych – to nie porada medyczna.',
+      en: 'A clean, client-side reconstitution calculator and educational compound library with a goal finder and half-life simulator. Deployed on GitHub Pages. Educational only - not medical advice.',
+      pl: 'Czysty, działający po stronie klienta kalkulator rekonstytucji oraz edukacyjna biblioteka związków z wyszukiwarką celów i symulatorem okresu półtrwania. Wdrożony na GitHub Pages. Wyłącznie w celach edukacyjnych - to nie porada medyczna.',
     },
     stack: ['React', 'TypeScript', 'Vite', 'GitHub Pages'],
     screen: { src: peppinScreen, position: 'center' },

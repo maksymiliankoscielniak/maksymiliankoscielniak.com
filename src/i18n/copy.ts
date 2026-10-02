@@ -2,7 +2,7 @@ export type Lang = 'en' | 'pl'
 
 export const en = {
   meta: {
-    title: 'Maksymilian Kościelniak — Full-stack developer & web designer',
+    title: 'Maksymilian Kościelniak | Full-stack developer & web designer',
     description:
       'Portfolio of Maksymilian Kościelniak, full-stack developer and web designer. Websites and web apps built with React, TypeScript and Python.',
   },
@@ -91,7 +91,7 @@ export type Dict = typeof en
 
 export const pl: Dict = {
   meta: {
-    title: 'Maksymilian Kościelniak — Full-stack developer i projektant stron',
+    title: 'Maksymilian Kościelniak | Full-stack developer i projektant stron',
     description:
       'Portfolio Maksymiliana Kościelniaka, full-stack developera i projektanta stron internetowych. Strony i aplikacje webowe w React, TypeScript i Pythonie.',
   },
