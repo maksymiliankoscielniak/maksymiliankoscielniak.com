@@ -16,21 +16,23 @@ function NeonSign({ reduce }: { reduce: boolean }) {
     <motion.div
       className="relative"
       style={{ transformOrigin: PIVOT }}
-      initial={reduce ? false : { y: '-70vh' }}
-      animate={reduce ? undefined : { y: 0, rotate: [0, 0, 2.6, -1.9, 1.2, -0.7, 0.3, 0] }}
+      initial={reduce ? false : { y: '-70vh', rotate: -6 }}
+      animate={reduce ? undefined : { y: 0, rotate: 0 }}
       transition={
         reduce
           ? undefined
           : {
-              y: { duration: 1.35, ease: [0.25, 0.85, 0.3, 1] },
-              rotate: { duration: 4.6, delay: 0.55, ease: 'easeInOut', times: [0, 0.12, 0.3, 0.46, 0.62, 0.78, 0.9, 1] },
+              // the left cable lets go first, so the sign comes down tilted (left side low) ...
+              y: { duration: 1.5, ease: [0.3, 0.55, 0.25, 1] },
+              // ... and then the right side catches up: a soft spring that swings out and loses energy on its own
+              rotate: { type: 'spring', stiffness: 20, damping: 1.2, mass: 1, delay: 0.8 },
             }
       }
     >
       <motion.div
         style={{ transformOrigin: PIVOT }}
-        animate={reduce ? undefined : { rotate: [0.35, -0.35] }}
-        transition={reduce ? undefined : { duration: 5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut', delay: 4.5 }}
+        animate={reduce ? undefined : { rotate: [0, 0.35, 0, -0.35, 0] }}
+        transition={reduce ? undefined : { duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 3.5 }}
       >
         <div className="sign-plate relative w-[88%] max-w-[40.5rem] sm:w-[75%] px-[clamp(0.9rem,2.6vw,2.2rem)] py-[clamp(0.9rem,2.2vw,1.8rem)]">
           <span aria-hidden="true" className={cable} style={{ left: '11%', bottom: 'calc(100% - 1px)', height: '100vh' }}>
