@@ -32,7 +32,7 @@ function NeonSign({ reduce }: { reduce: boolean }) {
         animate={reduce ? undefined : { rotate: [0.35, -0.35] }}
         transition={reduce ? undefined : { duration: 5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut', delay: 4.5 }}
       >
-        <div className="sign-plate relative w-full max-w-[54rem] px-[clamp(0.9rem,2.6vw,2.2rem)] py-[clamp(0.9rem,2.2vw,1.8rem)]">
+        <div className="sign-plate relative w-[88%] max-w-[40.5rem] sm:w-[75%] px-[clamp(0.9rem,2.6vw,2.2rem)] py-[clamp(0.9rem,2.2vw,1.8rem)]">
           <span aria-hidden="true" className={cable} style={{ left: '11%', bottom: 'calc(100% - 1px)', height: '100vh' }}>
             <span className={clevis} />
           </span>
@@ -85,11 +85,11 @@ export function Hero() {
         </div>
 
         <motion.div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-12" {...fade(reduce ? 0 : 2.0)}>
-          <p className="font-body text-[clamp(1.45rem,2.4vw,2rem)] italic leading-snug text-ink md:col-span-6 [text-shadow:0_0_10px_var(--color-paper),0_0_4px_var(--color-paper)]">
+          <p className="font-body text-[clamp(1.15rem,1.9vw,1.55rem)] italic leading-snug text-ink md:col-span-6 [text-shadow:0_0_10px_var(--color-paper),0_0_4px_var(--color-paper)]">
             {t.hero.role}
           </p>
           <div className="md:col-span-5 md:col-start-8">
-            <p className="max-w-[44ch] text-[1.2rem] text-body [text-shadow:0_0_10px_var(--color-paper),0_0_4px_var(--color-paper)]">{t.hero.tagline}</p>
+            <p className="max-w-[44ch] text-[1rem] text-body [text-shadow:0_0_10px_var(--color-paper),0_0_4px_var(--color-paper)]">{t.hero.tagline}</p>
             <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
               <a
                 href="#projects"

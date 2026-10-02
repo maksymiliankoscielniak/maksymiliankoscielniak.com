@@ -167,25 +167,27 @@ export function NeonTubes({ reduce }: { reduce: boolean }) {
       if (!el || !el.animate) return
       busy.add(i)
       active++
-      // stutter: a handful of quick flips, sometimes a long dark spell, then it catches again
-      const dur = 700 + Math.random() * 1500
-      const flips = 4 + Math.floor(Math.random() * 4)
-      const long = Math.random() < 0.45
-      const marks: [number, number][] = [[0, 1]]
-      let t = 0.04 + Math.random() * 0.06
-      for (let k = 0; k < flips; k++) {
-        const lo = 0.02 + Math.random() * 0.2
-        marks.push([t, 1], [t + 0.012, lo])
-        t += 0.05 + Math.random() * (long && k === flips - 2 ? 0.34 : 0.07)
-        if (t > 0.9) break
-        marks.push([t, lo], [t + 0.012, 1])
-        t += 0.03 + Math.random() * 0.08
-        if (t > 0.9) break
+      // a slow, uneven stutter: a few dips with soft edges, every one at least ~130 ms long; the tempo changes per burst
+      const tempo = 0.9 + Math.random() * 1.1
+      const dips = 2 + Math.floor(Math.random() * 3)
+      const ms: [number, number][] = [[0, 1]]
+      let t = 0
+      for (let k = 0; k < dips; k++) {
+        t += (200 + Math.random() * 500) * tempo // lit
+        ms.push([t, 1])
+        t += 80 + Math.random() * 60 // fade down
+        const lo = 0.03 + Math.random() * 0.2
+        ms.push([t, lo])
+        const lastDip = k === dips - 1
+        t += (lastDip && Math.random() < 0.5 ? 700 + Math.random() * 900 : 140 + Math.random() * 320) * tempo // dark
+        ms.push([t, lo])
+        t += 90 + Math.random() * 70 // catch again
+        ms.push([t, 1])
       }
-      marks.push([Math.min(0.97, t), 1], [1, 1])
-      const frames = marks
-        .sort((a, b) => a[0] - b[0])
-        .map(([offset, opacity]) => ({ offset: Math.min(1, offset), opacity }))
+      t += 150
+      ms.push([t, 1])
+      const dur = t
+      const frames = ms.map(([at, opacity]) => ({ offset: at / dur, opacity }))
       const anim = el.animate(frames, { duration: dur, easing: 'linear' })
       anim.onfinish = anim.oncancel = () => {
         busy.delete(i)
@@ -198,7 +200,7 @@ export function NeonTubes({ reduce }: { reduce: boolean }) {
         const free = els.map((_, i) => i).filter((i) => !busy.has(i))
         if (free.length) burst(free[Math.floor(Math.random() * free.length)])
       }
-      timer = window.setTimeout(tick, 700 + Math.random() * 1900)
+      timer = window.setTimeout(tick, 1000 + Math.random() * 2400)
     }
     timer = window.setTimeout(tick, 3600)
 

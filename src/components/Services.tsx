@@ -1,7 +1,7 @@
 import type { PointerEvent as ReactPointerEvent } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext'
-import { Constellation } from './Constellation'
+import { NeonStickers } from './NeonStickers'
 import { Dimension } from './Dimension'
 
 const spotlight = (e: ReactPointerEvent<HTMLElement>) => {
@@ -24,8 +24,8 @@ export function Services() {
 
   return (
     <section id="services" aria-label={t.services.heading} className="relative">
-      {/* waves, then nothing (the projects), then this, then nothing again, then waves at the end */}
-      <Constellation
+      {/* waves, then nothing (the projects), then neon stickers, then nothing again, then waves at the end */}
+      <NeonStickers
         className="absolute inset-x-0 top-[-6rem] h-[calc(100%+9rem)] w-full"
         style={{
           WebkitMaskImage: 'linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)',

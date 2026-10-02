@@ -1,7 +1,7 @@
-@import '@fontsource-variable/bricolage-grotesque/opsz.css';
-@import '@fontsource/newsreader/400.css';
-@import '@fontsource/newsreader/400-italic.css';
-@import '@fontsource/newsreader/500.css';
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/400-italic.css';
+@import '@fontsource/ibm-plex-mono/500.css';
 @import '@fontsource/homemade-apple/400.css';
 @import 'tailwindcss';
 
@@ -21,8 +21,10 @@
   --color-pencil: #3a7360;
   --color-wash: #0e1b16;
 
-  --font-display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-display: 'Archivo Variable', 'Arial Black', Arial, sans-serif;
+  --font-body: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+  --font-weight-medium: 600;
+  --font-weight-semibold: 800;
   --font-signature: 'Homemade Apple', 'Segoe Script', 'Brush Script MT', cursive;
 }
 
@@ -39,7 +41,7 @@
     background: var(--color-paper);
     color: var(--color-body);
     font-family: var(--font-body);
-    font-size: 1.125rem;
+    font-size: 1rem;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -53,7 +55,10 @@
   h3 {
     font-family: var(--font-display);
     color: var(--color-ink);
-    font-optical-sizing: auto;
+    font-stretch: 110%;
+  }
+  .font-display {
+    font-stretch: 108%;
   }
   ::selection {
     background: var(--color-accent);
@@ -188,4 +193,97 @@
 }
 .spot:hover::before {
   opacity: 1;
+}
+
+/* Neon stickers (Services background) */
+.sticker-field {
+  overflow-x: clip;
+  --px: 0;
+  --py: 0;
+}
+.sticker {
+  position: absolute;
+  aspect-ratio: 1;
+  transform: translate(calc(var(--px) * var(--d) * -16px), calc(var(--py) * var(--d) * -12px));
+}
+.sticker-pop,
+.sticker-bob {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sticker-pop {
+  transform: rotate(var(--rot)) scale(0);
+  opacity: 0;
+}
+.is-in .sticker-pop {
+  animation: sticker-pop 0.55s cubic-bezier(0.2, 1.7, 0.4, 1) var(--delay) forwards;
+}
+.sticker-bob {
+  animation: sticker-bob var(--dur) ease-in-out calc(var(--delay) + 0.6s) infinite alternate;
+}
+.sticker-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 3px rgb(111 240 192 / 0.75)) drop-shadow(0 0 12px rgb(111 240 192 / 0.4));
+  opacity: 0.88;
+}
+.sticker-buzz .sticker-svg {
+  animation: sticker-buzz 9s linear calc(var(--delay) + 3s) infinite;
+}
+.is-paused .sticker-bob,
+.is-paused .sticker-buzz .sticker-svg {
+  animation-play-state: paused;
+}
+@keyframes sticker-pop {
+  0% {
+    transform: rotate(calc(var(--rot) - 40deg)) scale(0);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--rot)) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes sticker-bob {
+  from {
+    transform: translateY(-7px) rotate(-3deg);
+  }
+  to {
+    transform: translateY(7px) rotate(3deg);
+  }
+}
+@keyframes sticker-buzz {
+  0%,
+  58%,
+  70%,
+  100% {
+    opacity: 0.88;
+  }
+  60%,
+  64% {
+    opacity: 0.2;
+  }
+  62%,
+  66.5% {
+    opacity: 0.8;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticker-pop {
+    transform: rotate(var(--rot));
+    opacity: 1;
+    animation: none;
+  }
+  .sticker-bob,
+  .sticker-buzz .sticker-svg {
+    animation: none;
+  }
+  .sticker {
+    transform: none;
+  }
 }

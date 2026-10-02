@@ -12,7 +12,7 @@ export function About() {
       <Dimension as="h2" label={t.about.heading} />
       <div className="mt-14 grid gap-14 md:mt-20 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="text-pretty font-body text-[clamp(1.5rem,2.5vw,2.15rem)] leading-[1.3] text-ink">{lead}</p>
+          <p className="text-pretty font-display text-[clamp(1.35rem,2.3vw,1.95rem)] font-medium leading-[1.28] tracking-[-0.015em] text-ink">{lead}</p>
           <div className="mt-8 max-w-[60ch] space-y-5 text-[1.15rem]">
             {rest.map((p) => (
               <p key={p} className="text-pretty">

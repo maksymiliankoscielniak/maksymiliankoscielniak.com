@@ -47,7 +47,7 @@ function Plate({ project: p, flip }: { project: Project; flip: boolean }) {
 
       <div className={`lg:col-span-5 lg:self-center ${flip ? 'lg:order-1' : ''}`}>
         <h3 className="text-[clamp(2.1rem,3.6vw,3.1rem)] font-semibold leading-none tracking-[-0.035em]">{p.title}</h3>
-        <p className="mt-3 font-body text-[1.25rem] italic text-muted">{p.tagline[lang]}</p>
+        <p className="mt-3 font-body text-[1.02rem] italic text-muted">{p.tagline[lang]}</p>
         <p className="mt-6 max-w-[52ch] text-body">{p.description[lang]}</p>
         <p className="mt-5 text-[1rem] text-muted">
           <span className="font-display font-medium text-ink">{t.work.builtWith}</span> {p.stack.join(', ')}
