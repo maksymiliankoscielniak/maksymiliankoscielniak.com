@@ -28,7 +28,6 @@ export const en = {
     role: 'Full-stack developer and web designer',
     tagline:
       'I design and build clear, fast websites and web apps, from data-heavy dashboards to everyday tools.',
-    where: 'Computer Science student in Łódź',
     ctaProjects: 'See the projects',
     ctaContact: 'Get in touch',
   },
@@ -156,7 +155,6 @@ export const pl: Dict = {
     role: 'Full-stack developer i projektant stron',
     tagline:
       'Projektuję i buduję czytelne, szybkie strony i aplikacje webowe, od dashboardów pełnych danych po codzienne narzędzia.',
-    where: 'Student informatyki w Łodzi',
     ctaProjects: 'Zobacz projekty',
     ctaContact: 'Napisz do mnie',
   },

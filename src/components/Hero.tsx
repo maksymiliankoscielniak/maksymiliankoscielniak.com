@@ -1,17 +1,16 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { useLang } from '../i18n/LanguageContext'
-import { Dimension } from './Dimension'
 import { HeroField } from './HeroField'
+import { NeonTubes } from './NeonTubes'
 
 const PIVOT = '50% -70vh' // the sign swings from far above, like a pendulum on its cables
 
 /** The headline as a neon sign: it is lowered on two cables, swings, then powers on. One letter is on its way out. */
 function NeonSign({ reduce }: { reduce: boolean }) {
-  // two cables run up to the top of the steel frame; eye-bolts sit where they meet it
-  const cable = 'absolute w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#34423d] to-[#7a9288]'
-  const eye =
-    'absolute left-1/2 top-full h-[14px] w-[14px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#9bb2a8] bg-paper'
+  // two steel wire ropes run up to the top of the frame, each ending in a square clevis
+  const cable = 'wire-rope absolute w-[4px] -translate-x-1/2'
+  const clevis = 'absolute left-1/2 top-full h-[18px] w-[18px] -translate-x-1/2 -translate-y-1/2 border-[4px] border-[#8da097] bg-paper'
 
   return (
     <motion.div
@@ -33,25 +32,19 @@ function NeonSign({ reduce }: { reduce: boolean }) {
         animate={reduce ? undefined : { rotate: [0.35, -0.35] }}
         transition={reduce ? undefined : { duration: 5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut', delay: 4.5 }}
       >
-        <div className="sign-plate relative inline-block max-w-full px-[clamp(1.4rem,3.6vw,3rem)] py-[clamp(0.7rem,1.6vw,1.4rem)]">
+        <div className="sign-plate relative w-full max-w-[54rem] px-[clamp(0.9rem,2.6vw,2.2rem)] py-[clamp(0.9rem,2.2vw,1.8rem)]">
           <span aria-hidden="true" className={cable} style={{ left: '11%', bottom: 'calc(100% - 1px)', height: '100vh' }}>
-            <span className={eye} />
+            <span className={clevis} />
           </span>
           <span aria-hidden="true" className={cable} style={{ left: '89%', bottom: 'calc(100% - 1px)', height: '100vh' }}>
-            <span className={eye} />
+            <span className={clevis} />
           </span>
-          <span aria-hidden="true" className="sign-bolt left-2.5 top-2.5" />
-          <span aria-hidden="true" className="sign-bolt right-2.5 top-2.5" />
-          <span aria-hidden="true" className="sign-bolt bottom-2.5 left-2.5" />
-          <span aria-hidden="true" className="sign-bolt bottom-2.5 right-2.5" />
-          <h1
-            className={`neon relative font-neon text-[clamp(3rem,8.4vw,7.6rem)] font-normal leading-[1.02] tracking-[0.005em] ${reduce ? '' : 'neon-powerup'}`}
-          >
-            <span className="block">
-              Mak<span className={reduce ? '' : 'neon-dead'}>s</span>ymilian
-            </span>
-            <span className="block">Kościelniak</span>
-          </h1>
+          <span aria-hidden="true" className="sign-bolt left-2 top-2" />
+          <span aria-hidden="true" className="sign-bolt right-2 top-2" />
+          <span aria-hidden="true" className="sign-bolt bottom-2 left-2" />
+          <span aria-hidden="true" className="sign-bolt bottom-2 right-2" />
+          <h1 className="sr-only">Maksymilian Kościelniak</h1>
+          <NeonTubes reduce={reduce} />
         </div>
       </motion.div>
     </motion.div>
@@ -87,9 +80,8 @@ export function Hero() {
       />
       <div className="relative mx-auto max-w-[1240px] px-6 pb-24 pt-28 md:px-12 md:pb-28 md:pt-32">
         {/* the dimension line below measures the name: it is exactly as wide as the longest line */}
-        <div className="block md:inline-block md:max-w-full">
+        <div className="block">
           <NeonSign reduce={!!reduce} />
-          <Dimension className="mt-7 !text-body md:mt-9" label={t.hero.where} draw delay={reduce ? 0 : 2.3} />
         </div>
 
         <motion.div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-12" {...fade(reduce ? 0 : 2.0)}>

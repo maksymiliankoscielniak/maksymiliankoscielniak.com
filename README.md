@@ -22,9 +22,9 @@ npm run preview    # serve dist/ locally
 
 ## Sections
 
-- **Hero**: the name as a neon sign: thin neon-tube script (Sacramento) on an unlit steel lattice plate, lowered on two cables, swinging, then powering on (one letter is on its way out; see `.neon-*` and `.sign-plate` in `src/index.css`; the script is `--font-neon`), over an animated field of mint ridgelines drawn on a canvas (`src/components/HeroField.tsx`). The ridgelines follow the pointer, fade out before the next section, and reappear, calmer, behind Contact. They pause when off screen or in a background tab, and is a still frame with reduced motion. A dimension line under the name measures it and carries a caption.
+- **Hero**: the name as a neon sign: real glass-tube lettering drawn in SVG (`src/components/NeonTubes.tsx`), each letter one run of tube, all joined by an unlit rail under the baseline that dives into holes in the plate at both ends of each line. It hangs on two steel ropes from a hard-edged lattice plate (`.sign-plate` in `src/index.css`), is lowered, swings and powers on once (then three tired tubes drop out at random, never more than two at a time), over an animated field of mint ridgelines (`src/components/HeroField.tsx`). The ridgelines follow the pointer, fade out before the next section, and reappear, calmer, behind Contact. They pause when off screen or in a background tab, and are a still frame with reduced motion.
 - **Selected work**: one plate per project (screenshot, short description, stack, live demo and source links). Each plate has its own dimension line naming what kind of project it is.
-- **Services**: what I build (four cards) and how I work (four steps). Copy lives in `services` and `process` in `src/i18n/copy.ts`.
+- **Services**: what I build (four cards) and how I work (four steps), over a slow network of drifting mint points (`src/components/Constellation.tsx`) so the middle of the page has some life between the two wave fields. Copy lives in `services` and `process` in `src/i18n/copy.ts`.
 - **About**: a short bio, the stack, and a signature.
 - **Right now**: a slim strip before Contact (`now` in `copy.ts`): what I am studying, building and open to. Edit it whenever it changes.
 - **Contact**: e-mail (with a copy button), GitHub, LinkedIn.

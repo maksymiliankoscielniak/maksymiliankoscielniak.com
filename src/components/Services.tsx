@@ -1,6 +1,7 @@
 import type { PointerEvent as ReactPointerEvent } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext'
+import { Constellation } from './Constellation'
 import { Dimension } from './Dimension'
 
 const spotlight = (e: ReactPointerEvent<HTMLElement>) => {
@@ -22,7 +23,16 @@ export function Services() {
   })
 
   return (
-    <section id="services" aria-label={t.services.heading} className="mx-auto max-w-[1240px] px-6 pb-24 md:px-12 md:pb-36">
+    <section id="services" aria-label={t.services.heading} className="relative">
+      {/* waves, then nothing (the projects), then this, then nothing again, then waves at the end */}
+      <Constellation
+        className="absolute inset-x-0 top-[-6rem] h-[calc(100%+9rem)] w-full"
+        style={{
+          WebkitMaskImage: 'linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)',
+          maskImage: 'linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)',
+        }}
+      />
+      <div className="relative mx-auto max-w-[1240px] px-6 pb-24 md:px-12 md:pb-36">
       <Dimension as="h2" label={t.services.heading} />
       <ul className="mt-14 grid gap-4 sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
         {t.services.items.map((it, i) => (
@@ -50,6 +60,7 @@ export function Services() {
           </motion.li>
         ))}
       </ol>
+      </div>
     </section>
   )
 }

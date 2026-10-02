@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext'
 import { Dimension } from './Dimension'
@@ -37,18 +36,8 @@ export function About() {
   )
 }
 
-/**
- * A quick, slightly careless signature: it is dashed across left to right,
- * then underlined with two fast strokes. Hover to sign it again.
- */
+/** A quick, slightly careless signature: dashed across left to right, then underlined with two fast strokes. It plays once. */
 function Signature({ text, reduce }: { text: string; reduce: boolean }) {
-  const [run, setRun] = useState(0)
-  const [busy, setBusy] = useState(true)
-  const replay = () => {
-    if (busy || reduce) return
-    setBusy(true)
-    setRun((n) => n + 1)
-  }
   const stroke = (delay: number, duration: number) => ({
     initial: reduce ? false : { pathLength: 0, opacity: 0 },
     whileInView: { pathLength: 1, opacity: 1 },
@@ -57,24 +46,17 @@ function Signature({ text, reduce }: { text: string; reduce: boolean }) {
   })
 
   return (
-    <div
-      aria-hidden="true"
-      className="relative mt-12 inline-block -rotate-[5deg] cursor-default select-none"
-      onPointerEnter={replay}
-    >
+    <div aria-hidden="true" className="relative mt-12 inline-block -rotate-[5deg] select-none">
       <motion.p
-        key={run}
         className="font-signature text-[clamp(3.2rem,7vw,4.6rem)] leading-[1.15] text-accent"
         initial={reduce ? false : { clipPath: 'inset(-50% 102% -70% -12%)', x: -10 }}
         whileInView={{ clipPath: 'inset(-50% -22% -70% -12%)', x: 0 }}
         viewport={{ once: true, margin: '0px 0px -15% 0px' }}
         transition={{ duration: 0.62, ease: [0.7, 0, 0.2, 1] }}
-        onAnimationComplete={() => window.setTimeout(() => setBusy(false), 500)}
       >
         {text}
       </motion.p>
       <svg
-        key={`s${run}`}
         viewBox="0 0 220 30"
         preserveAspectRatio="none"
         className="pointer-events-none absolute -bottom-1 left-[-4%] h-[0.55em] w-[112%] overflow-visible text-accent"
