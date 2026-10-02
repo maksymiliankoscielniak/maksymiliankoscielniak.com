@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { useLang } from '../i18n/LanguageContext'
 import { LangSwitch } from './LangSwitch'
 
-const SECTIONS = ['projects', 'about', 'contact'] as const
+const SECTIONS = ['projects', 'services', 'about', 'contact'] as const
 type SectionId = (typeof SECTIONS)[number]
 
 export function Header() {
@@ -44,6 +44,7 @@ export function Header() {
 
   const links: { id: SectionId; label: string }[] = [
     { id: 'projects', label: t.nav.projects },
+    { id: 'services', label: t.nav.services },
     { id: 'about', label: t.nav.about },
     { id: 'contact', label: t.nav.contact },
   ]
@@ -54,9 +55,9 @@ export function Header() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 border-b transition-[background-color,border-color,backdrop-filter] duration-300"
         style={{
-          backgroundColor: scrolled || open ? 'rgb(244 245 242 / 0.88)' : 'rgb(244 245 242 / 0)',
-          borderColor: scrolled || open ? 'var(--color-rule)' : 'transparent',
-          backdropFilter: scrolled || open ? 'blur(12px)' : 'none',
+          backgroundColor: scrolled || open ? 'rgb(6 9 8 / 0.82)' : 'rgb(6 9 8 / 0.94)',
+          borderColor: 'var(--color-rule)',
+          backdropFilter: 'blur(12px)',
         }}
       />
       <div className="mx-auto grid h-[68px] max-w-[1240px] grid-cols-[1fr_auto] items-center gap-4 px-6 md:grid-cols-[1fr_auto_1fr] md:px-12">

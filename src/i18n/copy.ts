@@ -9,6 +9,7 @@ export const en = {
   nav: {
     label: 'Main navigation',
     projects: 'Projects',
+    services: 'Services',
     about: 'About',
     contact: 'Contact',
     ai: 'AI policy',
@@ -38,6 +39,44 @@ export const en = {
     code: 'Source code',
     openLive: 'Open the live demo of',
   },
+  services: {
+    heading: 'What I build',
+    items: [
+      {
+        title: 'Websites',
+        text: 'Clear, fast, responsive sites for people and small businesses, designed and built from a blank page.',
+      },
+      {
+        title: 'Web apps and dashboards',
+        text: 'Interactive tools with React and TypeScript, backed by Python and FastAPI when the data needs a server.',
+      },
+      {
+        title: 'Interface design',
+        text: 'Layout, typography and colour worked out in the browser, so the design you approve is the one that ships.',
+      },
+      {
+        title: 'Launch and handover',
+        text: 'Deployment, a tidy repository and a short README, so the project is easy to run and to hand on.',
+      },
+    ],
+  },
+  process: {
+    heading: 'How I work',
+    steps: [
+      { title: 'Understand', text: 'We start with the problem and who it is for, before anything is drawn.' },
+      { title: 'Design', text: 'A simple structure, a type scale and a small palette, shown early so you can react.' },
+      { title: 'Build', text: 'Typed, readable code on the simplest stack that solves the problem.' },
+      { title: 'Ship and refine', text: 'Launch, check it on real devices, then fix what the first users find.' },
+    ],
+  },
+  now: {
+    label: 'Right now',
+    items: [
+      { label: 'Studying', value: 'Computer Science in Łódź' },
+      { label: 'Building', value: 'Web apps with React, TypeScript and FastAPI' },
+      { label: 'Open to', value: 'New projects and good conversations' },
+    ],
+  },
   about: {
     heading: 'About',
     body: [
@@ -50,7 +89,7 @@ export const en = {
       { label: 'Frameworks', items: 'React, Angular, FastAPI, Node.js, Django, Flask, Tailwind CSS' },
       { label: 'Tools', items: 'VS Code, Vite, Git, PostgreSQL' },
     ],
-    signature: 'Maksymilian',
+    signature: 'Max',
   },
   ai: {
     heading: 'AI policy',
@@ -98,6 +137,7 @@ export const pl: Dict = {
   nav: {
     label: 'Nawigacja główna',
     projects: 'Projekty',
+    services: 'Usługi',
     about: 'O mnie',
     contact: 'Kontakt',
     ai: 'Polityka AI',
@@ -127,6 +167,44 @@ export const pl: Dict = {
     code: 'Kod źródłowy',
     openLive: 'Otwórz demo projektu',
   },
+  services: {
+    heading: 'Co mogę zbudować',
+    items: [
+      {
+        title: 'Strony internetowe',
+        text: 'Czytelne, szybkie i responsywne strony dla osób i małych firm, zaprojektowane i zbudowane od pustej kartki.',
+      },
+      {
+        title: 'Aplikacje webowe i dashboardy',
+        text: 'Interaktywne narzędzia w React i TypeScript, z Pythonem i FastAPI, gdy dane potrzebują serwera.',
+      },
+      {
+        title: 'Projekt interfejsu',
+        text: 'Układ, typografia i kolory dopracowane już w przeglądarce, więc projekt, który akceptujesz, to ten, który trafia do sieci.',
+      },
+      {
+        title: 'Wdrożenie i przekazanie',
+        text: 'Publikacja, uporządkowane repozytorium i krótki README, żeby projekt dało się łatwo uruchomić i przejąć.',
+      },
+    ],
+  },
+  process: {
+    heading: 'Jak pracuję',
+    steps: [
+      { title: 'Zrozumieć', text: 'Zaczynamy od problemu i od tego, dla kogo jest rozwiązanie, zanim cokolwiek narysuję.' },
+      { title: 'Zaprojektować', text: 'Prosta struktura, skala typografii i mała paleta, pokazane wcześnie, żebyś mógł zareagować.' },
+      { title: 'Zbudować', text: 'Otypowany, czytelny kod na najprostszym stacku, który rozwiązuje problem.' },
+      { title: 'Wdrożyć i dopracować', text: 'Publikacja, test na prawdziwych urządzeniach i poprawki tego, co znajdą pierwsi użytkownicy.' },
+    ],
+  },
+  now: {
+    label: 'Teraz',
+    items: [
+      { label: 'Studiuję', value: 'Informatykę w Łodzi' },
+      { label: 'Buduję', value: 'Aplikacje webowe w React, TypeScript i FastAPI' },
+      { label: 'Otwarty na', value: 'Nowe projekty i dobre rozmowy' },
+    ],
+  },
   about: {
     heading: 'O mnie',
     body: [
@@ -139,7 +217,7 @@ export const pl: Dict = {
       { label: 'Frameworki', items: 'React, Angular, FastAPI, Node.js, Django, Flask, Tailwind CSS' },
       { label: 'Narzędzia', items: 'VS Code, Vite, Git, PostgreSQL' },
     ],
-    signature: 'Maksymilian',
+    signature: 'Maks',
   },
   ai: {
     heading: 'Polityka AI',

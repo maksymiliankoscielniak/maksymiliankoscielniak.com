@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext'
 import { Dimension } from './Dimension'
@@ -20,16 +21,7 @@ export function About() {
               </p>
             ))}
           </div>
-          <motion.p
-            aria-hidden="true"
-            className="mt-10 inline-block -rotate-3 font-signature text-[3.4rem] leading-none text-accent"
-            initial={reduce ? false : { clipPath: 'inset(-30% 100% -50% -5%)' }}
-            whileInView={{ clipPath: 'inset(-30% -10% -50% -5%)' }}
-            viewport={{ once: true, margin: '0px 0px -15% 0px' }}
-            transition={{ duration: 1.6, ease: [0.45, 0, 0.25, 1] }}
-          >
-            {t.about.signature}
-          </motion.p>
+          <Signature text={t.about.signature} reduce={!!reduce} />
         </div>
 
         <dl className="divide-y divide-rule border-y border-rule lg:col-span-4 lg:col-start-9 lg:self-start">
@@ -42,5 +34,58 @@ export function About() {
         </dl>
       </div>
     </section>
+  )
+}
+
+/**
+ * A quick, slightly careless signature: it is dashed across left to right,
+ * then underlined with two fast strokes. Hover to sign it again.
+ */
+function Signature({ text, reduce }: { text: string; reduce: boolean }) {
+  const [run, setRun] = useState(0)
+  const [busy, setBusy] = useState(true)
+  const replay = () => {
+    if (busy || reduce) return
+    setBusy(true)
+    setRun((n) => n + 1)
+  }
+  const stroke = (delay: number, duration: number) => ({
+    initial: reduce ? false : { pathLength: 0, opacity: 0 },
+    whileInView: { pathLength: 1, opacity: 1 },
+    viewport: { once: true, margin: '0px 0px -15% 0px' },
+    transition: { duration, delay, ease: [0.2, 0.8, 0.2, 1] as const },
+  })
+
+  return (
+    <div
+      aria-hidden="true"
+      className="relative mt-12 inline-block -rotate-[5deg] cursor-default select-none"
+      onPointerEnter={replay}
+    >
+      <motion.p
+        key={run}
+        className="font-signature text-[clamp(3.2rem,7vw,4.6rem)] leading-[1.15] text-accent"
+        initial={reduce ? false : { clipPath: 'inset(-50% 102% -70% -12%)', x: -10 }}
+        whileInView={{ clipPath: 'inset(-50% -22% -70% -12%)', x: 0 }}
+        viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+        transition={{ duration: 0.62, ease: [0.7, 0, 0.2, 1] }}
+        onAnimationComplete={() => window.setTimeout(() => setBusy(false), 500)}
+      >
+        {text}
+      </motion.p>
+      <svg
+        key={`s${run}`}
+        viewBox="0 0 220 30"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute -bottom-1 left-[-4%] h-[0.55em] w-[112%] overflow-visible text-accent"
+        style={{ fontSize: 'clamp(3.2rem,7vw,4.6rem)' }}
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+      >
+        <motion.path d="M4 20 C 50 11, 130 6, 214 3" strokeWidth="3" vectorEffect="non-scaling-stroke" {...stroke(0.55, 0.32)} />
+        <motion.path d="M46 27 C 90 21, 140 19, 176 17" strokeWidth="2" vectorEffect="non-scaling-stroke" {...stroke(0.74, 0.26)} />
+      </svg>
+    </div>
   )
 }

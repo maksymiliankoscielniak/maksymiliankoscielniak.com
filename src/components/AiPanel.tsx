@@ -48,7 +48,7 @@ function Drawer({ onClose }: { onClose: () => void }) {
     <>
       <motion.div
         aria-hidden="true"
-        className="fixed inset-0 z-[70] bg-ink/40"
+        className="fixed inset-0 z-[70] bg-black/65"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -60,7 +60,7 @@ function Drawer({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="ai-h"
-        className="fixed inset-y-0 right-0 z-[75] w-full max-w-[540px] overflow-y-auto overscroll-contain bg-paper shadow-[-30px_0_60px_-34px_rgb(30_33_40/0.55)]"
+        className="fixed inset-y-0 right-0 z-[75] w-full max-w-[540px] overflow-y-auto overscroll-contain bg-paper border-l border-rule shadow-[-30px_0_60px_-30px_rgb(0_0_0/0.9)]"
         initial={{ x: '102%' }}
         animate={{ x: 0 }}
         exit={{ x: '102%' }}

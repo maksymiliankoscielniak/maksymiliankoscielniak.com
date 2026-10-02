@@ -2,35 +2,35 @@
 @import '@fontsource/newsreader/400.css';
 @import '@fontsource/newsreader/400-italic.css';
 @import '@fontsource/newsreader/500.css';
-@import '@fontsource/allura/400.css';
+@import '@fontsource/homemade-apple/400.css';
 @import 'tailwindcss';
 
 /*
- * Drafting-table palette: cool paper, graphite ink, one ultramarine pen,
- * and the pale "non-photo" blue designers use for construction lines.
+ * Black and mint: near-black with a green cast, soft mint-white text,
+ * and one mint accent. "paper" is the page, "ink" is the strong text colour.
  */
 @theme {
-  --color-paper: #f4f5f2;
-  --color-sheet: #fbfbf9;
-  --color-ink: #1e2128;
-  --color-body: #383d47;
-  --color-muted: #646974;
-  --color-rule: #d6d9de;
-  --color-accent: #2e3fd6;
-  --color-accent-deep: #1f2ba6;
-  --color-pencil: #b4c0f1;
-  --color-wash: #e5e8f9;
+  --color-paper: #060908;
+  --color-sheet: #0c1210;
+  --color-ink: #e9f5ef;
+  --color-body: #a9b9b2;
+  --color-muted: #72837b;
+  --color-rule: #1b2723;
+  --color-accent: #6ff0c0;
+  --color-accent-deep: #3fd3a0;
+  --color-pencil: #3a7360;
+  --color-wash: #0e1b16;
 
   --font-display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-signature: 'Allura', 'Segoe Script', 'Brush Script MT', cursive;
+  --font-signature: 'Homemade Apple', 'Segoe Script', 'Brush Script MT', cursive;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     background: var(--color-paper);
-    color-scheme: light;
+    color-scheme: dark;
     /* same layout width whether or not the page scrolls (drawer locks scrolling) */
     scrollbar-gutter: stable;
   }
@@ -57,7 +57,7 @@
   }
   ::selection {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-paper);
   }
   :focus-visible {
     outline: 2px solid var(--color-accent);
@@ -72,14 +72,6 @@
       scroll-behavior: auto;
     }
   }
-}
-
-/* A faint dot grid, like the canvas of a layout tool, fading out downwards */
-.dot-grid {
-  background-image: radial-gradient(circle, #c4cad6 1px, transparent 1.3px);
-  background-size: 26px 26px;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);
 }
 
 /* Dimension line: a ruled line with end ticks and a caption sitting in a gap */
@@ -110,4 +102,84 @@
 }
 .link-underline:hover {
   background-size: 100% 2px;
+}
+
+/* Neon sign: pale-mint tubes with a mint glow. */
+.neon {
+  --lit-color: #e6fff6;
+  --lit-glow: 0 0 3px rgb(190 255 230 / 0.9), 0 0 11px rgb(111 240 192 / 0.85), 0 0 28px rgb(111 240 192 / 0.5),
+    0 0 64px rgb(111 240 192 / 0.32), 0 0 130px rgb(111 240 192 / 0.2);
+  color: var(--lit-color);
+  text-shadow: var(--lit-glow);
+}
+.neon-powerup {
+  animation: neon-on 1.3s linear 1.1s backwards;
+}
+@keyframes neon-on {
+  0%,
+  12%,
+  20%,
+  34%,
+  41% {
+    color: #17261f;
+    text-shadow: none;
+  }
+  14%,
+  26%,
+  37% {
+    color: var(--lit-color);
+    text-shadow: var(--lit-glow);
+  }
+  17%,
+  30% {
+    color: #2a4a3e;
+    text-shadow: 0 0 6px rgb(111 240 192 / 0.25);
+  }
+  45%,
+  100% {
+    color: var(--lit-color);
+    text-shadow: var(--lit-glow);
+  }
+}
+/* the tired letter: stutters, goes dark for a moment, stutters back */
+.neon-dead {
+  animation: neon-dead 8s linear 3.4s infinite;
+}
+@keyframes neon-dead {
+  0%,
+  50%,
+  54%,
+  58%,
+  68%,
+  71%,
+  100% {
+    color: var(--lit-color);
+    text-shadow: var(--lit-glow);
+  }
+  51%,
+  55%,
+  59%,
+  61%,
+  69% {
+    color: #1d3029;
+    text-shadow: none;
+  }
+  60%,
+  63%,
+  66% {
+    color: #2c4a3f;
+    text-shadow: 0 0 5px rgb(111 240 192 / 0.2);
+  }
+  62%,
+  65%,
+  67% {
+    color: #1d3029;
+    text-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neon-powerup,
+  .neon-dead {
+    animation: none;
+  }
 }

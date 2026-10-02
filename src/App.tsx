@@ -5,6 +5,8 @@ import { AiPanel } from './components/AiPanel'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
+import { Now } from './components/Now'
+import { Services } from './components/Services'
 import { Hero } from './components/Hero'
 import { Projects } from './components/Projects'
 import { LanguageProvider, useLang } from './i18n/LanguageContext'
@@ -54,7 +56,9 @@ function Shell() {
       <main>
         <Hero />
         <Projects />
+        <Services />
         <About />
+        <Now />
         <Contact />
       </main>
       <Footer onOpenAi={openAi} />

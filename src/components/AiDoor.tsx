@@ -26,7 +26,7 @@ export function AiDoor({
             type="button"
             onClick={onOpen}
             aria-haspopup="dialog"
-            className="fixed right-0 top-1/2 z-[45] hidden rounded-l-xl bg-ink px-2.5 py-5 font-display text-[0.88rem] font-semibold tracking-[0.02em] text-paper transition-colors hover:bg-accent md:block"
+            className="fixed right-0 top-1/2 z-[45] hidden rounded-l-xl bg-accent px-2.5 py-5 font-display text-[0.88rem] font-semibold tracking-[0.02em] text-paper transition-colors hover:bg-ink md:block"
             style={{ y: '-50%', writingMode: 'vertical-rl' }}
             initial={{ x: 48, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -43,7 +43,7 @@ export function AiDoor({
             type="button"
             onClick={onOpen}
             aria-haspopup="dialog"
-            className="fixed bottom-4 right-4 z-[45] rounded-full bg-ink px-4 py-2.5 font-display text-[0.9rem] font-semibold text-paper shadow-[0_6px_20px_-8px_rgb(30_33_40/0.6)] md:hidden"
+            className="fixed bottom-4 right-4 z-[45] rounded-full bg-accent px-4 py-2.5 font-display text-[0.9rem] font-semibold text-paper shadow-[0_6px_24px_-8px_rgb(0_0_0/0.8)] md:hidden"
             initial={{ y: 24, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 24, opacity: 0 }}

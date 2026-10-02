@@ -58,7 +58,7 @@ function Plate({ project: p, flip }: { project: Project; flip: boolean }) {
               href={live.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 font-display text-[0.95rem] font-semibold text-paper transition-colors hover:bg-accent"
+              className="inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 font-display text-[0.95rem] font-semibold text-paper transition-colors hover:bg-ink"
             >
               {live.label[lang]}
               <ArrowUpRight size={17} aria-hidden="true" />
